@@ -9,13 +9,17 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:8080'
+  }));
+app.options('*', cors());
 app.use(express.json());
 
 const authRoutes = require('../code/livraria_api/authRoutes')
 
 // Conexão com o mongo db
 
-mongoose.connect('mongodb+srv://thiagocontato1232:qwasqwas@library.bayuj.mongodb.net/?retryWrites=true&w=majority&appName=library'
+mongoose.connect('mongodb+srv://thiagocontato1232:123123123@library.bayuj.mongodb.net/?retryWrites=true&w=majority&appName=library'
     
     ,{
     useNewUrlParser:true,useUnifiedTopology:true

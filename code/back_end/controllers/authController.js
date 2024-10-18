@@ -1,7 +1,5 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const express = require('express');
 require("dotenv").config()
 // Middleware to parse URL-encoded bodies (optional, but useful for form submissions)
 //app.use(express.urlencoded({ extended: true }));
@@ -10,19 +8,19 @@ require("dotenv").config()
 
 // Função para registrar novos usuários
 exports.register = async (req, res) => {
-const { username, password } = req.body;
+const { username, password, idEmployee,email} = req.body;
     try {
         // Verifica se o usuário já existe
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).json({ error: 'Usuário já existe' });
         }
-
+        print(req.body)
         // Criptografa a senha antes de salvar no banco
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Cria um novo usuário
-        const newUser = new User({ username, password: hashedPassword });
+        const newUser = new User({ username, password: hashedPassword, idEmployee, email });
         await newUser.save();
         res.status(201).json({ message: 'Usuário registrado com sucesso' });
     } catch (error) {
@@ -46,10 +44,7 @@ exports.login = async (req, res) => {
         if (!isMatch) return res.status(400).json({
              error: 'Senha incorreta' });
 
-        // Cria web token
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, 
-            { expiresIn: '1h' });
-       // res.json({ token });
+        
         res.status(200).json({message: "Login realizado"});
     } catch (error) {
         console.error(error); // Loga o erro
