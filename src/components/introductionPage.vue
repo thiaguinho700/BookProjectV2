@@ -314,8 +314,13 @@ export default {
   name: 'IntroductionPage',
   methods: {
     async registerUser() {
+      console.log(this.name,
+           this.password,
+          this.idEmployee,
+          this.email,);
+      
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/register', {
+        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
           username: this.name,
           password: this.password,
           idEmployee:this.idEmployee,
@@ -336,8 +341,9 @@ export default {
     },
   
     async loginUser(){
+
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
+        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
           username: this.username,
           password: this.password,
           idEmployee:this.idEmployee

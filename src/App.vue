@@ -7,7 +7,7 @@
 
 <script>
 
-import IntroductionPage from "../src/components/IntroductionPage.vue";
+import IntroductionPage from "../src/components/introductionPage.vue";
 
 export default {
   data() {
