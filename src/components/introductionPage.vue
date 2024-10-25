@@ -343,7 +343,7 @@ export default {
     async loginUser(){
 
       try {
-        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
+        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
           username: this.username,
           password: this.password,
           idEmployee:this.idEmployee
