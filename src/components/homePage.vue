@@ -3,7 +3,7 @@
       <div class="containerTitle">
         <h1 class="textTitlePage">BOOKS</h1>
         <img
-          src="../../../images/hand-drawn-bookstore-logo-template 1.svg"
+          src="../../images/hand-drawn-bookstore-logo-template 1.svg"
           alt=""
         />
       </div>
@@ -18,7 +18,7 @@
       </div>
 
       <img
-        src="../../../images/ilustracao-de-clube-do-livro-desenhada-de-mao_23-2149350530-_1_-removebg-preview 2.svg"
+        src="../../images/ilustracao-de-clube-do-livro-desenhada-de-mao_23-2149350530-_1_-removebg-preview 2.svg"
         alt=""
       />
     </div>
@@ -31,70 +31,70 @@
         <ul>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_10-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_10-removebg-preview.svg"
               alt=""
             />
             <h4>All</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_11-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_11-removebg-preview.svg"
               alt=""
             />
             <h4>Ebooks</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_12-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_12-removebg-preview.svg"
               alt=""
             />
             <h4>New</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_13-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_13-removebg-preview.svg"
               alt=""
             />
             <h4>Bestsellers</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_14-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_14-removebg-preview.svg"
               alt=""
             />
             <h4>Audiobooks</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_15-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_15-removebg-preview.svg"
               alt=""
             />
             <h4>Fiction</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_16-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_16-removebg-preview.svg"
               alt=""
             />
             <h4>Romance</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_17-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_17-removebg-preview.svg"
               alt=""
             />
             <h4>Fantasy</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_18-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_18-removebg-preview.svg"
               alt=""
             />
             <h4>Mange</h4>
           </li>
           <li class="iconsType">
             <img
-              src="../../../images/iconsTypeBook/image_19-removebg-preview.svg"
+              src="../../images/iconsTypeBook/image_19-removebg-preview.svg"
               alt=""
             />
             <h4>Crime</h4>
@@ -134,7 +134,7 @@
             <div id="content">
               <div class="item">
                 <img
-                  src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+                  src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -191,7 +191,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/51TgheB19FL._AC_UL320_.svg"
+                  src="../../images/books/51TgheB19FL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -248,7 +248,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/616U6mSP3lL._AC_UL320_.svg"
+                  src="../../images/books/616U6mSP3lL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -305,7 +305,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/619T0W3tfuL._AC_UL320_.svg"
+                  src="../../images/books/619T0W3tfuL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -362,7 +362,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/61mOJKmB0tL._AC_UL320_.svg"
+                  src="../../images/books/61mOJKmB0tL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -419,7 +419,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+                  src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -476,7 +476,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/51TgheB19FL._AC_UL320_.svg"
+                  src="../../images/books/51TgheB19FL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -533,7 +533,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/616U6mSP3lL._AC_UL320_.svg"
+                  src="../../images/books/616U6mSP3lL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -590,7 +590,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/619T0W3tfuL._AC_UL320_.svg"
+                  src="../../images/books/619T0W3tfuL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -647,7 +647,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/61mOJKmB0tL._AC_UL320_.svg"
+                  src="../../images/books/61mOJKmB0tL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -704,7 +704,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/51TgheB19FL._AC_UL320_.svg"
+                  src="../../images/books/51TgheB19FL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -761,7 +761,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/616U6mSP3lL._AC_UL320_.svg"
+                  src="../../images/books/616U6mSP3lL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -818,7 +818,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/619T0W3tfuL._AC_UL320_.svg"
+                  src="../../images/books/619T0W3tfuL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -875,7 +875,7 @@
               </div>
               <div class="item">
                 <img
-                  src="../../../images/books/61mOJKmB0tL._AC_UL320_.svg"
+                  src="../../images/books/61mOJKmB0tL._AC_UL320_.svg"
                   alt=""
                 />
                 <h3>Autor</h3>
@@ -1003,7 +1003,7 @@
         <ul class="containerBooks">
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1014,7 +1014,7 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1025,7 +1025,7 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1036,53 +1036,7 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
-              alt=""
-            />
-            <div class="subContainerTextAllBooks">
-              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-              <h3>Author: Thiago</h3>
-              <span>Available</span>
-            </div>
-          </li>
-        </ul>
-        <ul class="containerBooks">
-          <li>
-            <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
-              alt=""
-            />
-            <div class="subContainerTextAllBooks">
-              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-              <h3>Author: Thiago</h3>
-              <span>Available</span>
-            </div>
-          </li>
-          <li>
-            <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
-              alt=""
-            />
-            <div class="subContainerTextAllBooks">
-              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-              <h3>Author: Thiago</h3>
-              <span>Available</span>
-            </div>
-          </li>
-          <li>
-            <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
-              alt=""
-            />
-            <div class="subContainerTextAllBooks">
-              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-              <h3>Author: Thiago</h3>
-              <span>Available</span>
-            </div>
-          </li>
-          <li>
-            <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1095,7 +1049,7 @@
         <ul class="containerBooks">
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1106,7 +1060,7 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1117,7 +1071,7 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1128,7 +1082,53 @@
           </li>
           <li>
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              alt=""
+            />
+            <div class="subContainerTextAllBooks">
+              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
+              <h3>Author: Thiago</h3>
+              <span>Available</span>
+            </div>
+          </li>
+        </ul>
+        <ul class="containerBooks">
+          <li>
+            <img
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              alt=""
+            />
+            <div class="subContainerTextAllBooks">
+              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
+              <h3>Author: Thiago</h3>
+              <span>Available</span>
+            </div>
+          </li>
+          <li>
+            <img
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              alt=""
+            />
+            <div class="subContainerTextAllBooks">
+              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
+              <h3>Author: Thiago</h3>
+              <span>Available</span>
+            </div>
+          </li>
+          <li>
+            <img
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              alt=""
+            />
+            <div class="subContainerTextAllBooks">
+              <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
+              <h3>Author: Thiago</h3>
+              <span>Available</span>
+            </div>
+          </li>
+          <li>
+            <img
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="subContainerTextAllBooks">
@@ -1146,7 +1146,7 @@
         <div class="containerTitle">
           <h1 class="textTitlePage">BOOKS</h1>
           <img
-            src="../../../images/hand-drawn-bookstore-logo-template 1.svg"
+            src="../../images/hand-drawn-bookstore-logo-template 1.svg"
             alt=""
           />
         </div>
@@ -1275,7 +1275,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--color-white);
-  background-image: url(../../../images/bgImage/Desktop\ -\ 11.png);
+  background-image: url(../../images/bgImage/Desktop\ -\ 11.png);
 
 }
 

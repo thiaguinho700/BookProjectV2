@@ -8,6 +8,8 @@
       <h3 class="textLogin" v-on:click="LoginScroll()">LOGIN</h3>
       <div class="containerSignup">
         <h3 class="textSignUp" v-on:click="SignUpScroll()">SIGN UP</h3>
+        
+        
       </div>
     </div>
   </nav>
@@ -188,6 +190,7 @@
           </div>
             <div class="containerButtonLogin">
               <button class="buttonLogin" type="submit" >Sign up</button>
+              <router-link class="textSignUp" to="/home">Home</router-link>
             </div>
      
           </div>
