@@ -173,29 +173,23 @@
           </p>
         </div>
         <div class="containerInputsLoginSecond">
-          <form @submit.prevent = "registerUser">
-          <div class="containerInputUp">
-          
-              <input type="text" class="inputLogin" v-model="name" id="name" placeholder="Name" />
-            <input type="text" class="inputLogin" v-model="idEmployee" id="employeeId" placeholder="Employee ID" />
-
-            <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
-
-            <input type="password" class="inputLogin"  id="inputLogin" placeholder="Confirm Password" />
-            <div class="containerInputDown">
-            <input type="text" class="inputLogin"  v-model="email" id="email" placeholder="Email" />
-            <div class="containerInpuFile">
-              <input type="file" class="inputLogin" id="fileInput" placeholder="Profile Photo" />
-            </div>
-          </div>
-            <div class="containerButtonLogin">
-              <button class="buttonLogin" type="submit" >Sign up</button>
-              <router-link class="textSignUp" to="/home">Home</router-link>
-            </div>
-     
-          </div>
-        
-        </form>
+          <form @submit.prevent="registerUser">
+    <div class="containerInputUp">
+      <input type="text" class="inputLogin" v-model="name" id="name" placeholder="Name" />
+      <input type="text" class="inputLogin" v-model="idEmployee" id="employeeId" placeholder="Employee ID" />
+      <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
+      <input type="password" class="inputLogin" id="confirmPassword" placeholder="Confirm Password" />
+      <div class="containerInputDown">
+        <input type="text" class="inputLogin" v-model="email" id="email" placeholder="Email" />
+        <div class="containerInputFile">
+          <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput" placeholder="Profile Photo" />
+        </div>
+      </div>
+      <div class="containerButtonLogin">
+        <button class="buttonLogin" type="submit">Sign up</button>
+      </div>
+    </div>
+  </form>
         </div>
       </div>
     </div>
@@ -315,69 +309,122 @@ import axios from 'axios';
 
 export default {
   name: 'IntroductionPage',
+  data() {
+    return {
+      name: '',
+      idEmployee: '',
+      password: '',
+      email: '',
+      image: null, // Propriedade para armazenar o arquivo de imagem
+    };
+  },
   methods: {
+    handleFileUpload(event) {
+      // Armazena o arquivo de imagem selecionado
+      this.image = event.target.files[0];
+    },
     async registerUser() {
-      console.log(this.name,
-           this.password,
-          this.idEmployee,
-          this.email,);
-      
+      // Verifica se os campos obrigatórios estão preenchidos
+      if (!this.name || !this.password || !this.idEmployee || !this.email || !this.image) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      // Prepara o FormData para enviar os dados e a imagem
+      const formData = new FormData();
+      formData.append('username', this.name);
+      formData.append('password', this.password);
+      formData.append('idEmployee', this.idEmployee);
+      formData.append('email', this.email);
+      formData.append('image', this.image); // Adiciona o arquivo de imagem
+
       try {
-        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
-          username: this.name,
-          password: this.password,
-          idEmployee:this.idEmployee,
-          email:this.email,
+        // Faz a requisição POST com o FormData
+        const response = await axios.post('http://localhost:5000/api/auth/register', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        // const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', formData, {
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //   },
         });
 
         if (response.status === 200) {
-          alert('Login realizado com sucesso!');
-          // Armazenar o token JWT (caso implementado)
+          alert('Registro realizado com sucesso!');
           localStorage.setItem('token', response.data.token);
-          // Redirecionar para uma página protegida
           this.$router.push('/dashboard');
         }
       } catch (error) {
-        console.log(error);
+        console.log('Erro ao registrar:', error);
+      }
+    },
+  },
+  // methods: {
+  //   async registerUser() {
+  //     console.log(this.name,
+  //          this.password,
+  //         this.idEmployee,
+  //         this.email,
+  //       this.image);
+      
+  //     try {
+  //       const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
+  //         username: this.name,
+  //         password: this.password,
+  //         idEmployee:this.idEmployee,
+  //         email:this.email,
+  //         image:this.email,
+  //       });
+
+  //       if (response.status === 200) {
+  //         alert('Login realizado com sucesso!');
+  //         // Armazenar o token JWT (caso implementado)
+  //         localStorage.setItem('token', response.data.token);
+  //         // Redirecionar para uma página protegida
+  //         this.$router.push('/dashboard');
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
         
-      }
-    },
+  //     }
+  //   },
   
-    async loginUser(){
+  //   async loginUser(){
 
-      try {
-        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
-          username: this.username,
-          password: this.password,
-          idEmployee:this.idEmployee
-        });
+  //     try {
+  //       const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
+  //         username: this.username,
+  //         password: this.password,
+  //         idEmployee:this.idEmployee
+  //       });
 
-        if (response.status === 201) {
-          alert('Usuário registrado com sucesso!');
-          // Aqui você pode redirecionar para a página de login ou outro lugar
-          this.$router.push('/login');
-        }
-      } catch (error) {
-        console.error(error);
-        alert('Erro ao registrar usuário');
-      }
-    },
-    LoginScroll() {
-      window.scrollBy({
-        top: 1100,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
-    SignUpScroll() {
-      window.scrollBy({
-        top: 2700,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
+  //       if (response.status === 201) {
+  //         alert('Usuário registrado com sucesso!');
+  //         // Aqui você pode redirecionar para a página de login ou outro lugar
+  //         this.$router.push('/login');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert('Erro ao registrar usuário');
+  //     }
+  //   },
+  //   LoginScroll() {
+  //     window.scrollBy({
+  //       top: 1100,
+  //       left: 0,
+  //       behavior: "smooth",
+  //     });
+  //   },
+  //   SignUpScroll() {
+  //     window.scrollBy({
+  //       top: 2700,
+  //       left: 0,
+  //       behavior: "smooth",
+  //     });
+  //   },
 
-  }
+  // }
   }
 
 document.addEventListener("DOMContentLoaded", function () {
