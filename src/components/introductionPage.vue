@@ -5,7 +5,9 @@
       <img src="../../images/hand-drawn-bookstore-logo-template 1.svg" alt="" />
     </div>
     <div class="containerOptionsUser">
-      <h3 class="textLogin" v-on:click="LoginScroll()">LOGIN</h3>
+      <!-- <h3 class="textLogin" v-on:click="LoginScroll()">LOGIN</h3> -->
+     
+      <router-link to="/HomePage"> <h3 class="textLogin" >LOGIN</h3></router-link>
       <div class="containerSignup">
         <h3 class="textSignUp" v-on:click="SignUpScroll()">SIGN UP</h3>
         
@@ -307,6 +309,7 @@
 
 import axios from 'axios';
 
+
 export default {
   name: 'IntroductionPage',
   data() {
@@ -318,7 +321,21 @@ export default {
       image: null, // Propriedade para armazenar o arquivo de imagem
     };
   },
+  mounted(){
+this.getBooks()
+  },
   methods: {
+    getBooks(){
+      
+       axios.get("http://localhost:5000/api/books").then((respo) =>{
+        const data = respo.data
+        data.map((item) =>{
+          console.log(item);
+          
+        })
+        
+      })
+    },
     handleFileUpload(event) {
       // Armazena o arquivo de imagem selecionado
       this.image = event.target.files[0];
@@ -359,6 +376,7 @@ export default {
         console.log('Erro ao registrar:', error);
       }
     },
+   
   },
   // methods: {
   //   async registerUser() {

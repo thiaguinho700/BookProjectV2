@@ -1,13 +1,11 @@
 <template>
   <div id="app">
     <!-- Formulário para adicionar ou editar um livro -->
-    <IntroductionPage></IntroductionPage>
+     <RouterView></RouterView>
   </div>
 </template>
 
 <script>
-
-import IntroductionPage from "../src/components/introductionPage.vue";
 
 export default {
   data() {
@@ -15,9 +13,7 @@ export default {
       bookToEdit: null, // Inicializa o estado do livro a ser editado
     };
   },
-  components: {
-    IntroductionPage
-  },
+
   methods: {
     // Função para definir o livro que será editado
     setBookToEdit(book) {
