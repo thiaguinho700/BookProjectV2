@@ -6,12 +6,14 @@
     </div>
     <div class="containerOptionsUser">
       <!-- <h3 class="textLogin" v-on:click="LoginScroll()">LOGIN</h3> -->
-     
-      <router-link to="/HomePage"> <h3 class="textLogin" >LOGIN</h3></router-link>
+
+      <router-link to="/HomePage">
+        <h3 class="textLogin">LOGIN</h3>
+      </router-link>
       <div class="containerSignup">
         <h3 class="textSignUp" v-on:click="SignUpScroll()">SIGN UP</h3>
-        
-        
+
+
       </div>
     </div>
   </nav>
@@ -75,16 +77,16 @@
         </p>
 
         <div class="containerInputsLogin">
-          <form @submit.prevent = "loginUser">
-          <input v-model="username" class="inputLogin" id="username" placeholder="Nome" />
-          <input type="text" class="inputLogin" id="idEmployee" v-model="idEmployee" placeholder="Employee ID" />
-          <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
+          <form @submit.prevent="loginUser">
+            <input v-model="username" class="inputLogin" id="username" placeholder="Nome" />
+            <input type="text" class="inputLogin" id="idEmployee" v-model="idEmployee" placeholder="Employee ID" />
+            <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
 
-          <div class="containerButtonLogin">
-            <h3 class="forgotPass">Forgot passowrd</h3>
-            <button class="buttonLogin" type="submit">Log in</button>
-          </div>
-        </form>
+            <div class="containerButtonLogin">
+              <h3 class="forgotPass">Forgot passowrd</h3>
+              <button class="buttonLogin" type="submit">Log in</button>
+            </div>
+          </form>
         </div>
       </div>
       <img src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350534-removebg-preview 1.svg"
@@ -176,22 +178,23 @@
         </div>
         <div class="containerInputsLoginSecond">
           <form @submit.prevent="registerUser">
-    <div class="containerInputUp">
-      <input type="text" class="inputLogin" v-model="name" id="name" placeholder="Name" />
-      <input type="text" class="inputLogin" v-model="idEmployee" id="employeeId" placeholder="Employee ID" />
-      <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
-      <input type="password" class="inputLogin" id="confirmPassword" placeholder="Confirm Password" />
-      <div class="containerInputDown">
-        <input type="text" class="inputLogin" v-model="email" id="email" placeholder="Email" />
-        <div class="containerInputFile">
-          <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput" placeholder="Profile Photo" />
-        </div>
-      </div>
-      <div class="containerButtonLogin">
-        <button class="buttonLogin" type="submit">Sign up</button>
-      </div>
-    </div>
-  </form>
+            <div class="containerInputUp">
+              <input type="text" class="inputLogin" v-model="name" id="name" placeholder="Name" />
+              <input type="text" class="inputLogin" v-model="idEmployee" id="employeeId" placeholder="Employee ID" />
+              <input type="password" class="inputLogin" v-model="password" id="password" placeholder="Password" />
+              <input type="password" class="inputLogin" id="confirmPassword" placeholder="Confirm Password" />
+              <div class="containerInputDown">
+                <input type="text" class="inputLogin" v-model="email" id="email" placeholder="Email" />
+                <div class="containerInputFile">
+                  <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput"
+                    placeholder="Profile Photo" />
+                </div>
+              </div>
+              <div class="containerButtonLogin">
+                <button class="buttonLogin" type="submit">Sign up</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -321,19 +324,19 @@ export default {
       image: null, // Propriedade para armazenar o arquivo de imagem
     };
   },
-  mounted(){
-this.getBooks()
+  mounted() {
+    this.getBooks()
   },
   methods: {
-    getBooks(){
-      
-       axios.get("http://localhost:5000/api/books").then((respo) =>{
+    getBooks() {
+
+      axios.get("http://localhost:5000/api/books").then((respo) => {
         const data = respo.data
-        data.map((item) =>{
+        data.map((item) => {
           console.log(item);
-          
+
         })
-        
+
       })
     },
     handleFileUpload(event) {
@@ -361,10 +364,10 @@ this.getBooks()
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        // const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', formData, {
-        //   headers: {
-        //     'Content-Type': 'multipart/form-data',
-        //   },
+          // const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', formData, {
+          //   headers: {
+          //     'Content-Type': 'multipart/form-data',
+          //   },
         });
 
         if (response.status === 200) {
@@ -376,74 +379,49 @@ this.getBooks()
         console.log('Erro ao registrar:', error);
       }
     },
-   
+    async loginUser() {
+      const username = this.username
+          const password=  this.password
+          const idEmployee=  this.idEmployee
+     if (username !== "" || password !== "" || idEmployee !== ""){
+      try {
+        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
+          username: username,
+          password: password,
+          idEmployee: idEmployee
+        });
+
+        if (response.status === 201) {
+          alert('Usuário registrado com sucesso!');
+          // Aqui você pode redirecionar para a página de login ou outro lugar
+          this.$router.push('/login');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Erro ao registrar usuário');
+      }
+     }else{
+      alert("Por favor, preencha todos os campos.")
+     }
+    },
+    LoginScroll() {
+      window.scrollBy({
+        top: 1100,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+    SignUpScroll() {
+      window.scrollBy({
+        top: 2700,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+
+    // }
   },
-  // methods: {
-  //   async registerUser() {
-  //     console.log(this.name,
-  //          this.password,
-  //         this.idEmployee,
-  //         this.email,
-  //       this.image);
-      
-  //     try {
-  //       const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/register', {
-  //         username: this.name,
-  //         password: this.password,
-  //         idEmployee:this.idEmployee,
-  //         email:this.email,
-  //         image:this.email,
-  //       });
-
-  //       if (response.status === 200) {
-  //         alert('Login realizado com sucesso!');
-  //         // Armazenar o token JWT (caso implementado)
-  //         localStorage.setItem('token', response.data.token);
-  //         // Redirecionar para uma página protegida
-  //         this.$router.push('/dashboard');
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-        
-  //     }
-  //   },
-  
-  //   async loginUser(){
-
-  //     try {
-  //       const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
-  //         username: this.username,
-  //         password: this.password,
-  //         idEmployee:this.idEmployee
-  //       });
-
-  //       if (response.status === 201) {
-  //         alert('Usuário registrado com sucesso!');
-  //         // Aqui você pode redirecionar para a página de login ou outro lugar
-  //         this.$router.push('/login');
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //       alert('Erro ao registrar usuário');
-  //     }
-  //   },
-  //   LoginScroll() {
-  //     window.scrollBy({
-  //       top: 1100,
-  //       left: 0,
-  //       behavior: "smooth",
-  //     });
-  //   },
-  //   SignUpScroll() {
-  //     window.scrollBy({
-  //       top: 2700,
-  //       left: 0,
-  //       behavior: "smooth",
-  //     });
-  //   },
-
-  // }
-  }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   var i = 0;
@@ -527,8 +505,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 body {
-  margin-left: 8pc;
-  margin-right: 8pc;
   background-color: var(--bg-main_color);
 }
 

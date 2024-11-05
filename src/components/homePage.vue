@@ -10,7 +10,7 @@
   </nav>
   <div class="containerWelcome">
     <div class="containerWelcomeText">
-      <h3 class="welcomeText">Welcome, Thiago!</h3>
+      <h3 class="welcomeText" id="welcomeText">Welcome, Thiago!</h3>
       <h5>What are we gonna read today?</h5>
     </div>
 
@@ -480,7 +480,7 @@
             </div>
           </div>
         </div>
-        <button id="prev">
+        <button id="prev" >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="none" d="M0 0h24v24H0V0z" />
             <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
@@ -531,11 +531,12 @@
   <div class="containerAllBooks">
     <div class="containerAllBooksTitle">
       <h3>All of our books</h3>
-      <span>View All</span>
+      <span @click="handleNavigation('/allBooksPage')">View All</span>
     </div>
     <div class="subContaineAllBooks">
       <ul class="containerBooks">
-        <li>
+
+        <li @click="handleNavigation('/bookView')">
           <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
           <div class="subContainerTextAllBooks">
             <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
@@ -543,6 +544,7 @@
             <span>Available</span>
           </div>
         </li>
+
         <li>
           <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
           <div class="subContainerTextAllBooks">
@@ -695,7 +697,11 @@
 <script>
 export default {
   name: 'HomePage',
-
+  methods:{
+    handleNavigation(toDestination){
+      this.$router.push(toDestination)
+    }
+  }
 }
 </script>
 
@@ -723,13 +729,6 @@ body {
   background-repeat: no-repeat;
   background-color: var(--color-white);
 
-}
-
-.containerWelcome,
-.containerSelectTypeBook,
-.containerHighlightsBooks {
-  margin-left: 8pc;
-  margin-right: 8pc;
 }
 
 .containerNavBar {
@@ -767,6 +766,7 @@ body {
   width: 90%;
   display: flex;
   margin-top: 6pc;
+  margin-bottom: 20px;
   align-items: baseline;
 }
 
@@ -783,9 +783,10 @@ span {
 }
 
 .containerAllBooksTitle>span {
+  font-size: 20px;
   color: var(--color-blue);
-  font-weight: 600;
   text-decoration: underline;
+  font-weight: 600;
 }
 
 .containerAllBooksTitle>span:hover {
@@ -1096,12 +1097,13 @@ canvas {}
 
 .subContaineAllBooks {
   width: 90%;
-  border: 1px solid black;
-  background-color: var(--color-white);
   display: flex;
+  border-radius: 20px;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: column;
+  border: 1px solid black;
+  background-color: var(--color-white);
 }
 
 .containerAllBooks {

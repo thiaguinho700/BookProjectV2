@@ -3,7 +3,7 @@
         <div class="containerTitle">
           <h1 class="textTitlePage">BOOKS</h1>
           <img
-            src="../../../images/hand-drawn-bookstore-logo-template 1.svg"
+            src="../../images/hand-drawn-bookstore-logo-template 1.svg"
             alt=""
           />
         </div>
@@ -12,7 +12,7 @@
         </div>
       </nav>
       <div class="containerUp">
-        <button id="prev">
+        <button id="prev" @click="handleNavigation('/HomePage')">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -28,7 +28,7 @@
         <div class="containerMainBook">
           <div class="containerDataBook">
             <img
-              src="../../../images/books/51TgheB19FL._AC_UL320_-1.svg"
+              src="../../images/books/51TgheB19FL._AC_UL320_-1.svg"
               alt=""
             />
             <div class="containerDataBookText">
@@ -393,7 +393,7 @@
           <div class="containerTitle">
             <h1 class="textTitlePage">BOOKS</h1>
             <img
-              src="../../../images/hand-drawn-bookstore-logo-template 1.svg"
+              src="../../images/hand-drawn-bookstore-logo-template 1.svg"
               alt=""
             />
           </div>
@@ -494,7 +494,11 @@
 <script>
 export default {
   name: 'bookViewPage',
-  
+  methods:{
+    handleNavigation(toDestination){
+      this.$router.push(toDestination)
+    }
+  }
 }
 </script>
 
@@ -521,7 +525,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--color-white);
-  background-image: url(../../../images/bgImage/Desktop\ -\ 11.png);
+  background-image: url(../../images/bgImage/Desktop\ -\ 11.png);
 }
 body {
   height: 100vh;

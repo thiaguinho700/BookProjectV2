@@ -1,8 +1,9 @@
 // src/router/index.js
+import HomePage from '../components/homePage.vue';
+import bookViewPage from '../components/bookViewPage.vue';
+import AllBooksPage from '../components/allBooksPage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Introductionpage from '../components/introductionPage.vue';
-import HomePage from '../components/homePage.vue';
-import AllBooksPage from '../components/allBooksPage.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/AllBooksPage',
     name: 'AllBooksPage',
     component: AllBooksPage
+  },
+  {
+    path: '/bookView',
+    name: 'bookView',
+    component: bookViewPage
   }
 ];
 
