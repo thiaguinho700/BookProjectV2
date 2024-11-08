@@ -505,6 +505,8 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 body {
+  margin-left: 8pc;
+  margin-right: 8pc;
   background-color: var(--bg-main_color);
 }
 
@@ -883,3 +885,4 @@ a {
   text-decoration: none;
 }
 </style>
+

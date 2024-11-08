@@ -978,7 +978,7 @@ span {
 
 #prev {
   top: 50%;
-  left: -6pc;
+  left: -95px;
   display: none;
   transform: translate(50%, -50%);
   background-color: var(--color-red);

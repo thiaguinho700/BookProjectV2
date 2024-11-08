@@ -35,39 +35,43 @@
       </div>
       <ul class="containerBookContainer">
         <li class="containerBookRow">
-          <div class="containerBookMain">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-            <div class="subContainerBookData">
-              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
-              <h4>Thiago</h4>
-              <h5>Avaliable</h5>
-            </div>
-          </div>
-          <div class="containerBookMain">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-            <div class="subContainerBookData">
-              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
-              <h4>Thiago</h4>
-              <h5>Avaliable</h5>
-            </div>
-          </div>
-          <div class="containerBookMain">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-            <div class="subContainerBookData">
-              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
-              <h4>Thiago</h4>
-              <h5>Avaliable</h5>
-            </div>
-          </div>
-          <div class="containerBookMain">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-            <div class="subContainerBookData">
-              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
-              <h4>Thiago</h4>
-              <h5>Avaliable</h5>
-            </div>
-          </div>
+          <li v-for="book in books" :key="book.id">
+          {{ book.title }}
         </li>
+      </li>
+          <!-- <div class="containerBookMain">
+            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+            <div class="subContainerBookData">
+              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
+              <h4>Thiago</h4>
+              <h5>Avaliable</h5>
+            </div>
+          </div>
+          <div class="containerBookMain">
+            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+            <div class="subContainerBookData">
+              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
+              <h4>Thiago</h4>
+              <h5>Avaliable</h5>
+            </div>
+          </div>
+          <div class="containerBookMain">
+            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+            <div class="subContainerBookData">
+              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
+              <h4>Thiago</h4>
+              <h5>Avaliable</h5>
+            </div>
+          </div>
+          <div class="containerBookMain">
+            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+            <div class="subContainerBookData">
+              <h3>Lorem ipsuLorem ipsuLorem ipsu</h3>
+              <h4>Thiago</h4>
+              <h5>Avaliable</h5>
+            </div>
+          </div> -->
+       
         <li class="containerBookRow">
           <div class="containerBookMain">
             <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
@@ -180,8 +184,8 @@
         <input v-model="title" class="inputLogin" id="title" placeholder="Title" />
         <input type="text" class="inputLogin" id="author" v-model="author" placeholder="Author" />
         <input type="text" class="inputLogin" id="year" v-model="year" placeholder="Year" />
-        <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput" placeholder="Image" />
-
+        <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput"
+        placeholder="Profile Photo" />
 
         <div class="containerButtonLogin">
           <h3 class="forgotPass">Forgot passowrd</h3>
@@ -252,10 +256,25 @@ export default {
       title: '',
       author: '',
       year: '',
-      image: '',
+      image: null,
+      books:[ ]
     };
   },
+  mounted() {
+    this.getAllBooksSync()
+  },
   methods: {
+    async getAllBooksSync(){
+      try {
+        await axios.get("http://localhost:5000/api/books").then((respo) =>{
+          const data = respo.data
+          this.books = data
+          
+        })
+      } catch (error) {
+        console.error(error);
+      }
+    },
     handleFileUpload(event) {
       // Armazena o arquivo de imagem selecionado
       this.image = event.target.files[0];
