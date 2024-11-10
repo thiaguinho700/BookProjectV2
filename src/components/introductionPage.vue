@@ -94,7 +94,7 @@
     </div>
   </div>
 
-  <div class="containerGraphics">
+  <div class=".containerGraphics-Int">
     <div class="containerTitleGraphics">
       <h3 class="titleGraphics">
         <p>
@@ -734,8 +734,10 @@ input::placeholder {
   flex-direction: column;
 }
 
-.containerGraphics {
+.containerGraphics-Int {
   margin-top: 10pc;
+  display:flex;
+  flex-direction: column
 }
 
 .containerTitleSignup>h3 {
@@ -767,6 +769,10 @@ input::placeholder {
   overflow: hidden;
   width: 100%;
   position: relative;
+}
+
+.carousel-track{
+width:100%
 }
 
 .carousel-track,

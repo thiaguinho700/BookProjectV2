@@ -525,7 +525,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--color-white);
-  background-image: url(../../images/bgImage/Desktop\ -\ 11.png);
+  /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
 }
 body {
   height: 100vh;
