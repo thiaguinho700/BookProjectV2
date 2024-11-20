@@ -22,9 +22,8 @@
     <div class="containerWelcomeText" id="containerWelcomeText">
 
       <h3 class="welcomeText" id="welcomeText">
-        <!-- WELCOME TO -->
-        <h2 class="booksText" id="booksText">
-          <!-- BOOKS -->
+        
+        <h2 class="booksText" id="booksText">      
         </h2>
       </h3>
     </div>
