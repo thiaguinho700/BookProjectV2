@@ -501,7 +501,7 @@ img {
 }
 
 .containerFooter {
-  height: 230px;
+  height: 231px;
   margin-top: 4pc;
   background: rgb(90, 178, 166);
   background: linear-gradient(
