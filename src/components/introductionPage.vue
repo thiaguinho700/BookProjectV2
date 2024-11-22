@@ -1,4 +1,5 @@
 <template>
+
   <nav class="containerNavBar">
     <div class="containerTitle">
       <h1 class="textTitlePage">BOOKS</h1>
@@ -12,8 +13,6 @@
       </router-link>
       <div class="containerSignup">
         <h3 class="textSignUp" v-on:click="SignUpScroll()">SIGN UP</h3>
-
-
       </div>
     </div>
   </nav>
@@ -22,14 +21,15 @@
     <div class="containerWelcomeText" id="containerWelcomeText">
 
       <h3 class="welcomeText" id="welcomeText">
-        
-        <h2 class="booksText" id="booksText">      
+
+        <h2 class="booksText" id="booksText">
         </h2>
       </h3>
     </div>
 
     <img src="../../images/image-removebg-preview (3) 1.svg" alt="" />
   </div>
+
   <div class="containerIcons">
     <ul>
       <li class="subContainerIcon">
@@ -64,6 +64,7 @@
       </li>
     </ul>
   </div>
+
   <div class="containerLogin">
     <div class="containerLoginTitle">
       <h3>LOG IN</h3>
@@ -215,38 +216,10 @@
             <img src="../../images/books/51TgheB19FL._AC_UL320_.svg" alt="Icon 3" />
             <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
           </div>
-          <div class="carousel-item">
-            <img src="../../images/books/616U6mSP3lL._AC_UL320_.svg" alt="Icon 4" />
+          <div v-for="book in books" :key="book.id">
+            <img :src="'http://localhost:5000/' + book.image"  alt="Icon 3" />
             <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/619T0W3tfuL._AC_UL320_.svg" alt="Icon 5" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/61mOJKmB0tL._AC_UL320_.svg" alt="Icon 6" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="Icon 7" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_.svg" alt="Icon 8" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/616U6mSP3lL._AC_UL320_.svg" alt="Icon 9" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/619T0W3tfuL._AC_UL320_.svg" alt="Icon 10" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div class="carousel-item">
-            <img src="../../images/books/61mOJKmB0tL._AC_UL320_.svg" alt="Icon 11" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
+</div>
         </div>
       </div>
     </div>
@@ -302,7 +275,6 @@
     </div>
   </footer>
 
-
 </template>
 
 <script>
@@ -320,7 +292,8 @@ export default {
       idEmployee: '',
       password: '',
       email: '',
-      image: null, // Propriedade para armazenar o arquivo de imagem
+      image: null, 
+      books:[]
     };
   },
   mounted() {
@@ -328,15 +301,12 @@ export default {
   },
   methods: {
     getBooks() {
-
       axios.get("http://localhost:5000/api/books").then((respo) => {
-        const data = respo.data
-        data.map((item) => {
-          console.log(item);
-
-        })
-
-      })
+        const data = respo.data;
+        this.books = data.map(item => item.image);
+      }).catch((error) => {
+        console.error("Error fetching books:", error);
+      });
     },
     handleFileUpload(event) {
       // Armazena o arquivo de imagem selecionado
@@ -380,28 +350,28 @@ export default {
     },
     async loginUser() {
       const username = this.username
-          const password=  this.password
-          const idEmployee=  this.idEmployee
-     if (username !== "" || password !== "" || idEmployee !== ""){
-      try {
-        const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
-          username: username,
-          password: password,
-          idEmployee: idEmployee
-        });
+      const password = this.password
+      const idEmployee = this.idEmployee
+      if (username !== "" || password !== "" || idEmployee !== "") {
+        try {
+          const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
+            username: username,
+            password: password,
+            idEmployee: idEmployee
+          });
 
-        if (response.status === 201) {
-          alert('Usuário registrado com sucesso!');
-          // Aqui você pode redirecionar para a página de login ou outro lugar
-          this.$router.push('/login');
+          if (response.status === 201) {
+            alert('Usuário registrado com sucesso!');
+            // Aqui você pode redirecionar para a página de login ou outro lugar
+            this.$router.push('/login');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Erro ao registrar usuário');
         }
-      } catch (error) {
-        console.error(error);
-        alert('Erro ao registrar usuário');
+      } else {
+        alert("Por favor, preencha todos os campos.")
       }
-     }else{
-      alert("Por favor, preencha todos os campos.")
-     }
     },
     LoginScroll() {
       window.scrollBy({
@@ -735,7 +705,7 @@ input::placeholder {
 
 .containerGraphics-Int {
   margin-top: 10pc;
-  display:flex;
+  display: flex;
   flex-direction: column
 }
 
@@ -770,8 +740,8 @@ input::placeholder {
   position: relative;
 }
 
-.carousel-track{
-width:100%
+.carousel-track {
+  width: 100%
 }
 
 .carousel-track,
@@ -890,4 +860,3 @@ a {
   text-decoration: none;
 }
 </style>
-
