@@ -350,7 +350,6 @@ body {
 }
 
 #prev {
-  left: 20px;
   outline: 0;
   border: none;
   padding: 8px;

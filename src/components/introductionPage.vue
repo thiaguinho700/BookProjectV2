@@ -208,18 +208,10 @@
     <div class="carousel-container">
       <div class="carousel">
         <div class="carousel-track-copies">
-          <div class="carousel-item">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="Icon 1" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
+          <div v-for="book in books" v-bind:key="book._id" class="carousel-item">
+            <img :src="'http://localhost:5000/' + book.image" alt="Icon 3" />
+            <h2 class="titleCarouselIcon">{{ book.title }}</h2>
           </div>
-          <div class="carousel-item">
-            <img src="../../images/books/51TgheB19FL._AC_UL320_.svg" alt="Icon 3" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-          </div>
-          <div v-for="book in books" :key="book.id">
-            <img :src="'http://localhost:5000/' + book.image"  alt="Icon 3" />
-            <h2 class="titleCarouselIcon">Lorem ipsun Lorem ipsun</h2>
-</div>
         </div>
       </div>
     </div>
@@ -292,18 +284,84 @@ export default {
       idEmployee: '',
       password: '',
       email: '',
-      image: null, 
-      books:[]
+      image: null,
+      books: []
     };
   },
   mounted() {
     this.getBooks()
   },
   methods: {
+    carousel_fun() {
+      document.addEventListener("DOMContentLoaded", function () {
+        var i = 0;
+        var j = 0;
+        var txt = 'WELCOME TO';
+        var txt2 = "BOOKS";
+        var speed = 50;
+
+        function typeWriter() {
+          if (i < txt.length) {
+            document.getElementById("welcomeText").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+          } else if (i === txt.length) {
+            if (j < txt2.length) {
+              document.getElementById("booksText").innerHTML += txt2.charAt(j);
+              j++;
+              setTimeout(typeWriter, speed);
+            }
+          }
+        }
+
+        typeWriter();
+
+        const track = document.querySelector(".carousel-track");
+        let index = 0;
+
+        function moveCarousel() {
+          index++;
+          if (index >= track.children.length) {
+            index = 0;
+          }
+          track.style.transform = `translateX(-${index * 300}px)`;
+        }
+
+        setInterval(moveCarousel, 2000);
+
+        const trackCopis = document.querySelector(".carousel-track-copies");
+        let indexCopies = 0;
+
+        function moveCarouselCopies() {
+          indexCopies++;
+          if (indexCopies >= this.books.length) {
+            indexCopies = 0;
+          }
+          trackCopis.style.transform = `translateX(-${indexCopies * 200}px)`;
+        }
+
+        setInterval(moveCarouselCopies, 2000);
+
+        const trackdown = document.querySelector(".carousel-track-down");
+        let indexdown = 0;
+
+        function moveCarouselindexdown() {
+          indexdown++;
+          if (indexdown >= trackdown.children.length) {
+            indexdown = 0;
+          }
+          trackdown.style.transform = `translateX(-${indexdown * 300}px)`;
+        }
+
+        setInterval(moveCarouselindexdown, 2000);
+      });
+
+
+    },
     getBooks() {
       axios.get("http://localhost:5000/api/books").then((respo) => {
         const data = respo.data;
-        this.books = data.map(item => item.image);
+        this.books = data.map(item => item);
       }).catch((error) => {
         console.error("Error fetching books:", error);
       });
@@ -391,69 +449,6 @@ export default {
     // }
   },
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  var i = 0;
-  var j = 0;
-  var txt = 'WELCOME TO';
-  var txt2 = "BOOKS";
-  var speed = 50;
-
-  function typeWriter() {
-    if (i < txt.length) {
-      document.getElementById("welcomeText").innerHTML += txt.charAt(i);
-      i++;
-      setTimeout(typeWriter, speed);
-    } else if (i === txt.length) {
-      if (j < txt2.length) {
-        document.getElementById("booksText").innerHTML += txt2.charAt(j);
-        j++;
-        setTimeout(typeWriter, speed);
-      }
-    }
-  }
-
-  typeWriter();
-
-  const track = document.querySelector(".carousel-track");
-  let index = 0;
-
-  function moveCarousel() {
-    index++;
-    if (index >= track.children.length) {
-      index = 0;
-    }
-    track.style.transform = `translateX(-${index * 300}px)`;
-  }
-
-  setInterval(moveCarousel, 2000);
-
-  const trackCopis = document.querySelector(".carousel-track-copies");
-  let indexCopies = 0;
-
-  function moveCarouselCopies() {
-    indexCopies++;
-    if (indexCopies >= trackCopis.children.length) {
-      indexCopies = 0;
-    }
-    trackCopis.style.transform = `translateX(-${indexCopies * 200}px)`;
-  }
-
-  setInterval(moveCarouselCopies, 2000);
-
-  const trackdown = document.querySelector(".carousel-track-down");
-  let indexdown = 0;
-
-  function moveCarouselindexdown() {
-    indexdown++;
-    if (indexdown >= trackdown.children.length) {
-      indexdown = 0;
-    }
-    trackdown.style.transform = `translateX(-${indexdown * 300}px)`;
-  }
-
-  setInterval(moveCarouselindexdown, 2000);
-});
 
 
 </script>

@@ -1,4 +1,4 @@
-<template>
+<template class="containerTemplate">
   <nav class="containerNavBar">
     <div class="containerTitle">
       <h1 class="textTitlePage">BOOKS</h1>
@@ -84,7 +84,14 @@
     </div>
     <div class="subContainerIconsBooks">
       <div id="wrapper">
+        <button id="prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+          </svg>
+        </button> 
         <div id="carousel">
+        
           <div id="content">
             <div class="item">
               <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
@@ -480,12 +487,7 @@
             </div>
           </div>
         </div>
-        <button id="prev" >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="none" d="M0 0h24v24H0V0z" />
-            <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
-          </svg>
-        </button>
+    
         <button id="next">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="none" d="M0 0h24v24H0V0z" />
@@ -535,109 +537,39 @@
     </div>
     <div class="subContaineAllBooks">
       <ul class="containerBooks">
-
-        <li @click="handleNavigation('/bookView')">
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+        <li v-for="book in books.slice(0, 6)" v-bind:key="book._id" @click="handleNavigation('/bookView')">
+          <img :src="'http://localhost:5000/' + book.image" />
           <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
+            <h2>{{ book.title }}</h2>
+            <h3>Author: {{ book.author }}</h3>
+            <h3>Ano: {{ book.year }}</h3>
             <span>Available</span>
           </div>
         </li>
       </ul>
       <ul class="containerBooks">
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+        <li v-for="book in books.slice(6, 12)" v-bind:key="book._id" @click="handleNavigation('/bookView')">
+          <img :src="'http://localhost:5000/' + book.image" />
           <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
+            <h2>{{ book.title }}</h2>
+            <h3>Author: {{ book.author }}</h3>
+            <h3>Ano: {{ book.year }}</h3>
             <span>Available</span>
           </div>
         </li>
       </ul>
       <ul class="containerBooks">
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
+        <li v-for="book in books.slice(11, 17)" v-bind:key="book._id" @click="handleNavigation('/bookView')">
+          <img :src="'http://localhost:5000/' + book.image" />
           <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
-            <span>Available</span>
-          </div>
-        </li>
-        <li>
-          <img src="../../images/books/51TgheB19FL._AC_UL320_-1.svg" alt="" />
-          <div class="subContainerTextAllBooks">
-            <h2>Lorem ipsuLorem ipsuLorem ipsu</h2>
-            <h3>Author: Thiago</h3>
+            <h2>{{ book.title }}</h2>
+            <h3>Author: {{ book.author }}</h3>
+            <h3>Ano: {{ book.year }}</h3>
             <span>Available</span>
           </div>
         </li>
       </ul>
+
     </div>
   </div>
 
@@ -695,10 +627,27 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   name: 'HomePage',
-  methods:{
-    handleNavigation(toDestination){
+  mounted() {
+    this.getBooks()
+  },
+  data() {
+    return {
+      books: []
+    }
+  },
+  methods: {
+    async getBooks() {
+      await axios.get("http://localhost:5000/api/books").then((respo) => {
+        const data = respo.data
+        this.books = data.map(item => item)
+      })
+    },
+    handleNavigation(toDestination) {
       this.$router.push(toDestination)
     }
   }
@@ -729,6 +678,10 @@ body {
   background-repeat: no-repeat;
   background-color: var(--color-white);
 
+}
+
+.containerTemplate {
+  background-image: url('../../images/bgImage/Desktop\ -\ 11.png');
 }
 
 .containerNavBar {
@@ -948,7 +901,7 @@ span {
 
 #wrapper {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1646px;
   position: relative;
 }
 
