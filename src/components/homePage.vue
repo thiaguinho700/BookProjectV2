@@ -505,7 +505,7 @@
       </div>
       <div class="subContainerChart">
         <div id="chart-containerV1">
-          <canvas id="lineChartV1"></canvas>
+        <BarChart/>
         </div>
         <div id="chart-containerV2">
           <canvas id="barChartV2"></canvas>
@@ -629,6 +629,9 @@
 <script>
 
 import axios from 'axios';
+import BarChart from "../graphics/BarChat.vue";
+
+
 
 export default {
   name: 'HomePage',
@@ -639,6 +642,9 @@ export default {
     return {
       books: []
     }
+  },
+  components:{
+    BarChart 
   },
   methods: {
     async getBooks() {
