@@ -627,38 +627,40 @@
 </template>
 
 <script>
-
-import axios from 'axios';
-import BarChart from "../graphics/BarChat.vue";
-
-
+import axios from "axios";
+import BarChart from "../graphics/BarChart.vue";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   mounted() {
-    this.getBooks()
+    this.getBooks();
   },
   data() {
     return {
-      books: []
-    }
+      books: [], // Ensure books is used carefully
+    };
   },
-  components:{
-    BarChart 
+  components: {
+    BarChart,
   },
   methods: {
     async getBooks() {
-      await axios.get("http://localhost:5000/api/books").then((respo) => {
-        const data = respo.data
-        this.books = data.map(item => item)
-      })
+      try {
+        const respo = await axios.get("http://localhost:5000/api/books");
+        this.books = respo.data.map((item) => item);
+      } catch (error) {
+        console.error("Error fetching books:", error); // Debug error
+      }
     },
     handleNavigation(toDestination) {
-      this.$router.push(toDestination)
-    }
-  }
-}
+      if (toDestination !== this.$route.path) { // Avoid navigating to the same path repeatedly
+        this.$router.push(toDestination);
+      }
+    },
+  },
+};
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
