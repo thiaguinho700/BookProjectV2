@@ -107,9 +107,10 @@
       <div class="carousel">
         <div class="carousel-track">
           <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 2.svg" alt="Icon 1" />
+            <!-- <img src="../../images/graphics/image 2.svg" alt="Icon 1" /> -->
+            <BarChart/>
           </div>
-          <div class="carousel-item-graphic">
+          <!-- <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 3.svg" alt="Icon 2" />
           </div>
           <div class="carousel-item-graphic">
@@ -129,17 +130,16 @@
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 13.png" alt="Icon 6" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
     <div class="carousel-container">
       <div class="carousel">
         <div class="carousel-track-down">
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 5.svg" alt="Icon 5" />
-          </div>
-          <div class="carousel-item-graphic">
+          <!-- <div class="carousel-item-graphic">
+          </div> -->
+          <!-- <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 6.svg" alt="Icon 6" />
           </div>
           <div class="carousel-item-graphic">
@@ -156,7 +156,7 @@
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 15.png" alt="Icon 9" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -274,10 +274,13 @@
 // import authController from '../../code/back_end/controllers/authController'
 
 import axios from 'axios';
-
+import BarChart from '@/graphics/BarChart.vue';
 
 export default {
   name: 'IntroductionPage',
+  components:{
+BarChart
+  },
   data() {
     return {
       name: '',

@@ -1,49 +1,31 @@
 <template>
   <div>
-    <BarChart
-      v-if="chartData && chartOptions"
-      :chart-data="chartData"
-      :chart-options="chartOptions"
-      style="width: 800px; height: 500px"
-    />
+    <Bar :chart-data="chartData" :chart-options="chartOptions" />
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import { Bar } from "vue-chartjs";
-import {
-  Chart as ChartJS,
-  registerables 
-} from "chart.js";
+import { defineComponent } from 'vue';
+import { Bar } from 'vue-chartjs';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
-// Registrar os componentes do Chart.js
-ChartJS.register(
-  ...registerables 
-);
+// Register necessary components for Chart.js
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 export default defineComponent({
-  name: "BarChartComponent", // Nome atualizado
+  name: 'BarChart',
   components: {
-    BarChart: Bar, // Certifique-se de usar o componente correto
+    Bar,
   },
-  setup() {
-    
-      const testeData = {
-        labels: ["January", "February", "March", "April", "May", "June"],
-        datasets: [
-          {
-            labels: "Data 1",
-            backgroundColor: "#42A5F5",
-            data: [40, 20, 12, 39, 10, 40],
-          },
-        ],
-      }      
-    return {testeData}
+  props: {
+    chartData: {
+      type: Object,
+      required: true,
+    },
+    chartOptions: {
+      type: Object,
+      required: true,
+    },
   },
 });
 </script>
-
-<style>
-/* Adicione estilos específicos, se necessário */
-</style>

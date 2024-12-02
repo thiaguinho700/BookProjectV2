@@ -931,7 +931,7 @@
       </div>
       <div class="subContainerChart">
         <div id="chart-containerV1">
-          <BarChart />
+          <!-- <BarChart :chart-data="chartData" :chart-options="chartOptions" /> -->
         </div>
         <!-- <div id="chart-containerV2"></div>
         <div id="chart-containerV3"></div> -->
@@ -939,7 +939,7 @@
       <!-- <div class="subContainerChart">
         <div id="chart-containerV4"></div>
         <div id="chart-containerV5"></div>
-        <div id="chart-containerV6"></div>
+      
       </div> -->
     </div>
 
@@ -1104,20 +1104,34 @@
 
 <script>
 import axios from "axios";
-import BarChart from "../graphics/BarChart.vue";
+// import BarChart from "../graphics/BarChart.vue";
 
 export default {
   name: "HomePage",
   mounted() {
     this.getBooks();
   },
-  data() {
+   data() {
     return {
-      books: [], // Ensure books is used carefully
+      books: [],  
+      chartData: {
+        labels: ['January', 'ry', 'March', 'April', 'May'],
+        datasets: [
+          {
+            label: 'Sales',
+            backgroundColor: '#42A5F5',
+            data: [40, 20, 50, 30, 70],
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     };
   },
   components: {
-    BarChart,
+    // BarChart,
   },
   methods: {
     async getBooks() {
