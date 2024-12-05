@@ -492,11 +492,24 @@
 </template>
 
 <script>
+
+
+
 export default {
   name: 'bookViewPage',
+  mounted() {
+    const bookId = this.$route.params.bookId;
+    console.log(bookId); // Do something with the bookId
+    // Fetch book data or navigate based on the bookId
+  },
   methods:{
     handleNavigation(toDestination){
       this.$router.push(toDestination)
+    }
+  },
+  props:{
+    book:{
+      type:Object
     }
   }
 }
