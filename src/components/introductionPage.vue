@@ -21,8 +21,9 @@
     <div class="containerWelcomeText" id="containerWelcomeText">
 
       <h3 class="welcomeText" id="welcomeText">
-
+        <!-- WELCOME TO -->
         <h2 class="booksText" id="booksText">
+          <!-- BOOKS -->
         </h2>
       </h3>
     </div>
@@ -89,12 +90,12 @@
           </form>
         </div>
       </div>
-      <img src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350534-removebg-preview 1.svg"
+      <img class="imgContainerLoginContent" src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350534-removebg-preview 1.svg"
         alt="" />
     </div>
   </div>
 
-  <div class=".containerGraphics-Int">
+  <div class="containerGraphics-Int">
     <div class="containerTitleGraphics">
       <h3 class="titleGraphics">
         <p>
@@ -104,43 +105,13 @@
       </h3>
     </div>
     <div class="carousel-container">
-      <div class="carousel">
-        <div class="carousel-track">
-          <div class="carousel-item-graphic">
-            <!-- <img src="../../images/graphics/image 2.svg" alt="Icon 1" /> -->
-            <BarChart/>
-          </div>
-          <!-- <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 3.svg" alt="Icon 2" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 3.svg" alt="Icon 3" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 4.svg" alt="Icon 4" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 10.png" alt="Icon 5" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 11.png" alt="Icon 6" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 12.png" alt="Icon 6" />
-          </div>
-          <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 13.png" alt="Icon 6" />
-          </div> -->
-        </div>
-      </div>
-    </div>
-    <div class="carousel-container">
+    
       <div class="carousel">
         <div class="carousel-track-down">
-          <!-- <div class="carousel-item-graphic">
-          </div> -->
-          <!-- <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 6.svg" alt="Icon 6" />
+         <div class="carousel-item-graphic">
+          </div> 
+          <div class="carousel-item-graphic">
+            <img src="../../images/graphics/image 6.svg" alt="Icon 6" id="" />
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 7.svg" alt="Icon 7" />
@@ -156,7 +127,24 @@
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 15.png" alt="Icon 9" />
-          </div> -->
+          </div> 
+        </div>
+      </div>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-track-down">
+         <div class="carousel-item-graphic">
+          </div> 
+          <div class="carousel-item-graphic">
+            <img src="../../images/graphics/image 9.svg" alt="Icon 13" />
+          </div>
+          <div class="carousel-item-graphic">
+            <img src="../../images/graphics/image 14.png" alt="Icon 14" />
+          </div>
+          <div class="carousel-item-graphic">
+            <img src="../../images/graphics/image 15.png" alt="Icon 15" />
+          </div> 
         </div>
       </div>
     </div>
@@ -167,7 +155,7 @@
       <h3>SIGN UP</h3>
     </div>
     <div class="contentSignupUser">
-      <img src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350533-removebg-preview 1.svg"
+      <img class="imgContentSignupUser" src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350533-removebg-preview 1.svg"
         alt="" />
       <div class="subContainerSignupUser">
         <div class="subContainerSignupUserTitle">
@@ -274,12 +262,13 @@
 // import authController from '../../code/back_end/controllers/authController'
 
 import axios from 'axios';
-import BarChart from '@/graphics/BarChart.vue';
+
 
 export default {
   name: 'IntroductionPage',
-  components:{
-BarChart
+  mounted(){
+    this.getBooks()
+
   },
   data() {
     return {
@@ -290,9 +279,6 @@ BarChart
       image: null,
       books: []
     };
-  },
-  mounted() {
-    this.getBooks()
   },
   methods: {
     carousel_fun() {
@@ -401,8 +387,8 @@ BarChart
         })
 
         if (response.status >= 200 || response.status <= 299) {
-          alert('Registro realizado com sucesso!');      
-          localStorage.setItem('dataUser',response.data);          
+          alert('Registro realizado com sucesso!');
+          localStorage.setItem('dataUser', response.data);
           this.$router.push('/HomePage');
         }
       } catch (error) {
@@ -476,7 +462,9 @@ body {
   margin-right: 8pc;
   background-color: var(--bg-main_color);
 }
-
+.containerContentCopies{
+  margin-top: 10pc;
+}
 .containerNavBar {
   padding: 10px;
   display: flex;
@@ -726,7 +714,12 @@ input::placeholder {
 .contentSignupUser {
   display: flex;
 }
-
+.imgContentSignupUser{
+  width: 519px;
+}
+.imgContainerLoginContent{
+  width: 519px;
+}
 .subContainerSignupUser {
   margin-left: 4pc;
 }

@@ -11,7 +11,7 @@
   <div class="containerWelcome">
     <div class="containerWelcomeText">
       <h3 class="welcomeText" id="welcomeText">Welcome, {{ $route.query.name }}</h3>
-      <h5>What are we gonna read today?</h5>  
+      <h5>What are we gonna read today?</h5>
     </div>
 
     <img src="../../images/ilustracao-de-clube-do-livro-desenhada-de-mao_23-2149350530-_1_-removebg-preview 2.svg"
@@ -503,11 +503,19 @@
         <h3>Statistics</h3>
       </div>
       <div class="subContainerChart">
-        <div id="chart-containerV1">
-          <!-- <BarChart /> -->
+        <div class="containerUpChart">
+          <canvas id="myChart"></canvas>
+          <canvas id="myChart2"></canvas>
+          <canvas id="myChart3"></canvas>
         </div>
-        <!-- <div id="chart-containerV2"></div>
-        <div id="chart-containerV3"></div> -->
+        <div class="containerDownChart">
+          <canvas id="myChart4"></canvas>
+          <canvas id="myChart5"></canvas>
+          <canvas id="myChart6"></canvas>
+
+        </div>
+
+        <div id="chart-containerV3"></div>
       </div>
       <!-- <div class="subContainerChart">
         <div id="chart-containerV4"></div>
@@ -615,16 +623,140 @@
 <script>
 // import BarChart from "@/graphics/BarChart.vue";
 import axios from "axios";
-
+import Chart from 'chart.js/auto';
 
 
 export default {
   name: "HomePage",
+
   mounted() {
     this.getBooks(),
-    console.log(this.book), // Access the prop in the script
-    console.log(localStorage.getItem("dataUser"));
-    
+      console.log(this.book), // Access the prop in the script
+      console.log(localStorage.getItem("dataUser"));
+
+    const ctx = document.getElementById('myChart');
+    const ctx2 = document.getElementById('myChart2');
+    const ctx3 = document.getElementById('myChart3');
+    const ctx4 = document.getElementById('myChart4');
+    const ctx5 = document.getElementById('myChart5');
+    const ctx6 = document.getElementById('myChart6');
+
+    this.getBooks()
+
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart
+    const myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart2
+    const myChart3 = new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart3
+    const myChart4 = new Chart(ctx4, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart4
+    const myChart5 = new Chart(ctx5, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart5
+    const myChart6 = new Chart(ctx6, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    myChart6
   },
   props: ['book'],
   data() {
@@ -647,16 +779,16 @@ export default {
       }
     },
     handleNavigation(toDestination, object) {
-  if (toDestination !== this.$route.path) {
-    // Avoid navigating to the same path repeatedly
-    if (!object) {
-      this.$router.push({ path: toDestination });
-    } else {
-      // If object exists, pass it via params (if your route supports it)
-      this.$router.push({ path: toDestination, params: { bookId: object._id } });
+      if (toDestination !== this.$route.path) {
+        // Avoid navigating to the same path repeatedly
+        if (!object) {
+          this.$router.push({ path: toDestination });
+        } else {
+          // If object exists, pass it via params (if your route supports it)
+          this.$router.push({ path: toDestination, params: { bookId: object._id } });
+        }
+      }
     }
-  }
-}
 
   },
 };
