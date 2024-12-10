@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/HomePage',
     name: 'HomePage',
-    component: HomePage
+    component: HomePage,
+    props:true
   },
   {
     path: '/AllBooksPage',

@@ -398,12 +398,12 @@ BarChart
           //   headers: {
           //     'Content-Type': 'multipart/form-data',
           //   },
-        });
+        })
 
-        if (response.status === 200) {
-          alert('Registro realizado com sucesso!');
-          localStorage.setItem('token', response.data.token);
-          this.$router.push('/dashboard');
+        if (response.status >= 200 || response.status <= 299) {
+          alert('Registro realizado com sucesso!');      
+          localStorage.setItem('dataUser',response.data);          
+          this.$router.push('/HomePage');
         }
       } catch (error) {
         console.log('Erro ao registrar:', error);

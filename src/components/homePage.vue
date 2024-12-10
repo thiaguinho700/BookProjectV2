@@ -10,8 +10,8 @@
   </nav>
   <div class="containerWelcome">
     <div class="containerWelcomeText">
-      <h3 class="welcomeText" id="welcomeText">Welcome, Thiago!</h3>
-      <h5>What are we gonna read today?</h5>
+      <h3 class="welcomeText" id="welcomeText">Welcome, {{ $route.query.name }}</h3>
+      <h5>What are we gonna read today?</h5>  
     </div>
 
     <img src="../../images/ilustracao-de-clube-do-livro-desenhada-de-mao_23-2149350530-_1_-removebg-preview 2.svg"
@@ -616,11 +616,15 @@
 // import BarChart from "@/graphics/BarChart.vue";
 import axios from "axios";
 
+
+
 export default {
   name: "HomePage",
   mounted() {
     this.getBooks(),
-    console.log(this.book); // Access the prop in the script
+    console.log(this.book), // Access the prop in the script
+    console.log(localStorage.getItem("dataUser"));
+    
   },
   props: ['book'],
   data() {
