@@ -515,7 +515,7 @@
 
         </div>
 
-        <div id="chart-containerV3"></div>
+      
       </div>
       <!-- <div class="subContainerChart">
         <div id="chart-containerV4"></div>
@@ -630,10 +630,7 @@ export default {
   name: "HomePage",
 
   mounted() {
-    this.getBooks(),
-      console.log(this.book), // Access the prop in the script
-      console.log(localStorage.getItem("dataUser"));
-
+    this.getBooks()
     const ctx = document.getElementById('myChart');
     const ctx2 = document.getElementById('myChart2');
     const ctx3 = document.getElementById('myChart3');
@@ -785,7 +782,8 @@ export default {
           this.$router.push({ path: toDestination });
         } else {
           // If object exists, pass it via params (if your route supports it)
-          this.$router.push({ path: toDestination, params: { bookId: object._id } });
+          localStorage.setItem("bookData", JSON.stringify(object))
+          this.$router.push(toDestination);
         }
       }
     }
@@ -864,7 +862,7 @@ body {
 
 .containerAllBooksTitle>h3 {
   font-size: 30px;
-  color: var(--color-yellow);
+  color: var(--color-white_second);
   margin-right: 20px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -1034,7 +1032,7 @@ span {
 .containerTitleHighBooks>h2 {
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--color-red);
+  color: var(--color-white_second);
 }
 
 #wrapper {
@@ -1126,12 +1124,10 @@ span {
   justify-content: center;
 }
 
-.containerMainSubTitle {}
-
 .containerMainSubTitle>h3 {
   font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--color-red);
+  color: var(--color-white_second);
 }
 
 #chart-containerV1,
@@ -1150,7 +1146,10 @@ span {
   background-color: var(--color-white);
 }
 
-canvas {}
+canvas {
+  width: 220px;
+  padding: 20px;
+}
 
 .subContainerChart {
   display: flex;

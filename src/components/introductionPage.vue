@@ -90,8 +90,8 @@
           </form>
         </div>
       </div>
-      <img class="imgContainerLoginContent" src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350534-removebg-preview 1.svg"
-        alt="" />
+      <img class="imgContainerLoginContent"
+        src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350534-removebg-preview 1.svg" alt="" />
     </div>
   </div>
 
@@ -105,11 +105,11 @@
       </h3>
     </div>
     <div class="carousel-container">
-    
+
       <div class="carousel">
         <div class="carousel-track-down">
-         <div class="carousel-item-graphic">
-          </div> 
+          <div class="carousel-item-graphic">
+          </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 6.svg" alt="Icon 6" id="" />
           </div>
@@ -127,15 +127,15 @@
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 15.png" alt="Icon 9" />
-          </div> 
+          </div>
         </div>
       </div>
     </div>
     <div class="carousel-container">
       <div class="carousel">
         <div class="carousel-track-down">
-         <div class="carousel-item-graphic">
-          </div> 
+          <div class="carousel-item-graphic">
+          </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 9.svg" alt="Icon 13" />
           </div>
@@ -144,7 +144,7 @@
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 15.png" alt="Icon 15" />
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -155,8 +155,8 @@
       <h3>SIGN UP</h3>
     </div>
     <div class="contentSignupUser">
-      <img class="imgContentSignupUser" src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350533-removebg-preview 1.svg"
-        alt="" />
+      <img class="imgContentSignupUser"
+        src="../../images/pilha-desenhada-a-mao-de-ilustracao-de-livros_23-2149350533-removebg-preview 1.svg" alt="" />
       <div class="subContainerSignupUser">
         <div class="subContainerSignupUserTitle">
           <p>
@@ -266,7 +266,7 @@ import axios from 'axios';
 
 export default {
   name: 'IntroductionPage',
-  mounted(){
+  mounted() {
     this.getBooks()
 
   },
@@ -462,9 +462,11 @@ body {
   margin-right: 8pc;
   background-color: var(--bg-main_color);
 }
-.containerContentCopies{
+
+.containerContentCopies {
   margin-top: 10pc;
 }
+
 .containerNavBar {
   padding: 10px;
   display: flex;
@@ -714,12 +716,15 @@ input::placeholder {
 .contentSignupUser {
   display: flex;
 }
-.imgContentSignupUser{
+
+.imgContentSignupUser {
   width: 519px;
 }
-.imgContainerLoginContent{
+
+.imgContainerLoginContent {
   width: 519px;
 }
+
 .subContainerSignupUser {
   margin-left: 4pc;
 }
