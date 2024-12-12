@@ -20,19 +20,14 @@
   <div class="containerBookWidth">
     <div class="containerMainBook">
       <div class="containerDataBook">
-      
-          <img :src="'http://localhost:5000/' + bookData.image" alt="" />
+
+        <img :src="'http://localhost:5000/' + bookData.image" alt="" />
 
         <div class="containerDataBookText">
-          <input type="text" placeholder="Nome of the book" class="inputName" v-model="bookTitle.title">
+          <input type="text" placeholder="Nome of the book" class="inputName" v-model="bookDataAbout.title">
           <h2 class="titleDataBook"></h2>
           <span class="aboutBookText">
-            In the year 2157, humanity reached the pinnacle of space
-            exploration, but the discovery of a mysterious artifact on a
-            distant moon shook the foundations of science. The artifact, named
-            the "Eye of Infinity," is a glowing sphere capable of distorting
-            time and space, causing those who touch it to experience visions
-            of possible futures and forgotten pasts.
+           <textarea name="" id="" v-model="bookDataAbout.about"></textarea>
           </span>
 
           <div class="containerDataBookSub">
@@ -40,7 +35,8 @@
               <ul id="firstUpContainerCharacBook" class="containerCharacBook">
                 <li class="containerSection">
                   <h4 class="sectionTitle">PUBLISHER:</h4>
-                  <h4 class="sectionAbout">{{ bookData.author }}</h4>
+                  <input type="text" class="inputName" v-model="bookDataAbout.author">
+                  <!-- <h4 class="sectionAbout">{{ bookData.author }}</h4> -->
                 </li>
                 <li class="containerSection">
                   <h4 class="sectionTitle">
@@ -118,7 +114,7 @@
         </div>
       </div>
 
-    
+
 
     </div>
   </div>
@@ -126,7 +122,7 @@
     <div class="containerFooterUp">
       <div class="containerTitle">
         <h1 class="textTitlePage">BOOKS</h1>
-        
+
       </div>
       <p>
         Developed with
@@ -183,15 +179,25 @@ export default {
   data() {
     return {
       bookData: [],
-      bookTitle:{
-        title:''
+      idBookApi :'',
+      bookDataAbout: {
+        title: '',
+        author: '',
+        year: '',
+        about: 0,
+        image: '',
       }
     }
   },
   mounted() {
     const bookData = this.getDataBook()
     this.bookData = bookData
-    this.bookTitle.title = bookData.title
+    this.idBookApi = bookData._id
+    this.bookDataAbout.title = bookData.title
+    this.bookDataAbout.author = bookData.author
+    this.bookDataAbout.year = bookData.year
+    this.bookDataAbout.about = bookData.about
+    this.bookDataAbout.image = bookData.image
   },
   methods: {
     handleNavigation(toDestination) {
@@ -200,12 +206,21 @@ export default {
     getDataBook() {
       return JSON.parse(localStorage.getItem("bookData"))
     },
-    async saveEditBook(){
+    async saveEditBook() {
 
       const formData = new FormData()
-      formData.append("title", this.title)
+      formData.append("title", this.bookDataAbout.title)
+      formData.append("author", this.bookDataAbout.author)
+      formData.append("year", this.bookDataAbout.year)
+      formData.append("about", this.bookDataAbout.about)
+      formData.append("image", this.bookDataAbout.image)
 
-      await axios.patch("http://localhost:5000/api/books", )
+
+
+      await axios.patch(`http://localhost:5000/api/books/${this.idBookApi}`, formData).then(() =>{
+        alert("Dados atualizados com sucesso!")
+        this.$router.push("HomePage")
+      })
     }
   },
   props: {
@@ -255,9 +270,11 @@ body {
   padding-right: 2pc;
   background-color: var(--bg-main_color);
 }
-.inputName::placeholder{
+
+.inputName::placeholder {
   color: black;
 }
+
 .imageLogoSite {
   width: 200px;
   margin-left: 50px;
