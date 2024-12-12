@@ -24,7 +24,8 @@
           <img :src="'http://localhost:5000/' + bookData.image" alt="" />
 
         <div class="containerDataBookText">
-          <h2 class="titleDataBook">{{ bookData.title}}</h2>
+          <input type="text" placeholder="Nome of the book" class="inputName" v-model="bookTitle.title">
+          <h2 class="titleDataBook"></h2>
           <span class="aboutBookText">
             In the year 2157, humanity reached the pinnacle of space
             exploration, but the discovery of a mysterious artifact on a
@@ -112,236 +113,13 @@
             </div>
           </div>
           <div class="containerBottons">
-            <button class="borrowButton" id="borrowButton">Borrow</button>
-            <button class="refundButton" id="refundButton">Refund</button>
-            <button class="refundButton" @click="deleteBook(bookData._id)" id="refundButton">Delete</button>
-            <button class="refundButton" @click="editBook(bookData._id)" id="refundButton">Edit</button>
+            <button class="borrowButton" id="borrowButton">Save changes</button>
           </div>
         </div>
       </div>
 
-      <div class="containerReviews">
-        <div class="subContainerReviews">
-          <h2 class="titleContainerReview">Top Reviews</h2>
-          <ul>
-            <li>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-              <div class="containerReviewText">
-                <div class="titleContainerReviewText">
-                  <div class="subTitleContainer">
-                    <h3 class="nameUserReview">Fulano</h3>
-                    <span class="dateUserReview">30/01/2024</span>
-                  </div>
-                  <span class="contentReview">Tem que ser muito cabeça dura pra não ter a mente
-                    transformada com esse livro! Simplesmente espetacular!
-                    Acrescentou muito na minha mente de investidor! Muitos
-                    ensinamentos! Livro de leitura obrigatória pra
-                    todos!</span>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+    
 
-      <div class="containerReviews">
-        <div class="subContainerReviews">
-          <h2 class="titleContainerBorrowed">Borrowed History</h2>
-          <ul>
-            <li>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-              <div class="containerBorrowed">
-                <div class="subTitleContainerBorrowed">
-                  <h3>Fulano</h3>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Borrowed:</h2>
-                  <span>30/01/2024</span>
-                </div>
-                <div class="subContainerBorrowed">
-                  <h2>Returned:</h2>
-                  <span>30/01/2024</span>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
   <footer class="containerFooter">
@@ -397,19 +175,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 
 export default {
-  name: 'bookViewPage',
+  name: 'bookViewPageEdit',
   data() {
     return {
-      bookData: []
+      bookData: [],
+      bookTitle:{
+        title:''
+      }
     }
   },
   mounted() {
     const bookData = this.getDataBook()
     this.bookData = bookData
-    console.log(this.bookData);
-    
+    this.bookTitle.title = bookData.title
   },
   methods: {
     handleNavigation(toDestination) {
@@ -418,9 +200,12 @@ export default {
     getDataBook() {
       return JSON.parse(localStorage.getItem("bookData"))
     },
-    async editBook(idEdit){
-      localStorage.setItem("idEditBook", idEdit)
-      this.$router.push("/editBook")
+    async saveEditBook(){
+
+      const formData = new FormData()
+      formData.append("title", this.title)
+
+      await axios.patch("http://localhost:5000/api/books", )
     }
   },
   props: {
@@ -470,7 +255,9 @@ body {
   padding-right: 2pc;
   background-color: var(--bg-main_color);
 }
-
+.inputName::placeholder{
+  color: black;
+}
 .imageLogoSite {
   width: 200px;
   margin-left: 50px;

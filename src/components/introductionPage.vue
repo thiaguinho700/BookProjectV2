@@ -409,6 +409,7 @@ export default {
           if (response.status >= 200 || response.status <= 299) {
             alert('Usuário logado com sucesso!');
             // Aqui você pode redirecionar para a página de login ou outro lugar
+            localStorage.setItem("userData", JSON.stringify(username))          
             this.$router.push('/HomePage');
         }
 

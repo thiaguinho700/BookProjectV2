@@ -5,6 +5,7 @@ import AllBooksPage from '../components/allBooksPage.vue';
 import viewListUser from '../components/viewListUser.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Introductionpage from '../components/introductionPage.vue';
+import bookViewPageEdit from '../components/bookViewPageEdit.vue';
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: '/listUser',
     name: 'viewListUser',
     component: viewListUser
+  },
+  {
+    path: '/editBook',
+    name: 'bookViewPageEdit',
+    component: bookViewPageEdit
   },
   
 ];

@@ -10,7 +10,7 @@
   </nav>
   <div class="containerWelcome">
     <div class="containerWelcomeText">
-      <h3 class="welcomeText" id="welcomeText">Welcome, {{ $route.query.name }}</h3>
+      <h3 class="welcomeText" id="welcomeText">Welcome, {{ userData }}</h3>
       <h5>What are we gonna read today?</h5>
     </div>
 
@@ -628,7 +628,7 @@ export default {
     const ctx4 = document.getElementById('myChart4');
     const ctx5 = document.getElementById('myChart5');
     const ctx6 = document.getElementById('myChart6');
-
+    this.userData = localStorage.getItem("userData")
     this.getBooks()
 
     const myChart = new Chart(ctx, {
@@ -749,9 +749,8 @@ export default {
   props: ['book'],
   data() {
     return {
-
       books: [],
-
+      userData :''
     };
   },
   // components:{
