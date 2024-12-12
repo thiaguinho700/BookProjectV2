@@ -111,7 +111,7 @@
           <div class="carousel-item-graphic">
           </div>
           <div class="carousel-item-graphic">
-            <img src="../../images/graphics/image 6.svg" alt="Icon 6" id="" />
+            <img src="../../images/graphics/image 6.svg" alt="Icon 6" />
           </div>
           <div class="carousel-item-graphic">
             <img src="../../images/graphics/image 7.svg" alt="Icon 7" />
@@ -401,17 +401,17 @@ export default {
       const idEmployee = this.idEmployee
       if (username !== "" || password !== "" || idEmployee !== "") {
         try {
-          const response = await axios.post('https://api-book-bw94.onrender.com/api/auth/login', {
+          const response = await axios.post('http://localhost:5000/api/auth/login', {
             username: username,
             password: password,
             idEmployee: idEmployee
           });
-
-          if (response.status === 201) {
-            alert('Usuário registrado com sucesso!');
+          if (response.status >= 200 || response.status <= 299) {
+            alert('Usuário logado com sucesso!');
             // Aqui você pode redirecionar para a página de login ou outro lugar
-            this.$router.push('/login');
-          }
+            this.$router.push('/HomePage');
+        }
+
         } catch (error) {
           console.error(error);
           alert('Erro ao registrar usuário');

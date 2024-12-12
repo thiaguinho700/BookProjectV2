@@ -11,11 +11,7 @@
   <div class="subContainerWeb">
     <div class="containerUp">
       <button id="prev">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          class="iconArrow"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="iconArrow">
           <path fill="none" d="M0 0h24v24H0V0z" />
           <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
         </svg>
@@ -26,24 +22,19 @@
       <h3>You can filter everything!</h3>
       <button class="addBook">Add New book</button>
     </div>
-    <div class="subContainerInput">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"
-        class="IconMag"
-      >
-        <path
-          d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-        />
-      </svg>
-      <input
-        type="text"
-        name=""
-        id=""
-        class="inputSearch"
-        placeholder="Enter the name or author of the book"
-      />
-    </div>
+    <form @submit.prevent="searchBook">
+      <div class="containerMainInput">
+        <div class="subContainerInput">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="IconMag">
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+          </svg>
+          <input type="text" name="textSearch" id="textSearch" class="inputSearch" v-model="textSearch"
+            placeholder="Enter the name or author of the book" />
+        </div>
+        <button type="submit" class="btnSearch">Search</button>
+      </div>
+    </form>
     <div class="contanierAllBooksMain">
       <div class="containerAllBooksMul">
         <div class="containerTitleAddBook">
@@ -51,12 +42,10 @@
         </div>
         <div class="containerBookContainer">
           <div class="bookList" id='bookList'>
-            <ul class="containerBookRow" id="containerBookRow">
-              <li
-                class="containerBookMain"
-                v-for="book in books"
-                :key="book.id"
-              >
+
+            <ul v-if="filteredBooks.length > 0" class="containerBookRow" id="containerBookRow">
+              <!-- Render filteredBooks if it has items -->
+              <li class="containerBookMain" v-for="book in filteredBooks" :key="book.id" @click="handleNavigation('/bookView', book)">
                 <img :src="'http://localhost:5000/' + book.image" alt="" />
                 <div class="subContainerBookData">
                   <h3>{{ book.title }}</h3>
@@ -65,6 +54,19 @@
                 </div>
               </li>
             </ul>
+
+            <ul v-else>
+              <!-- Render books if filteredBooks is empty -->
+              <li class="containerBookMain" v-for="book in books" :key="book.id" @click="handleNavigation('/bookView', book)" >
+                <img :src="'http://localhost:5000/' + book.image" alt="" />
+                <div class="subContainerBookData">
+                  <h3>{{ book.title }}</h3>
+                  <h4>{{ book.author }}</h4>
+                  <h5>Available</h5>
+                </div>
+              </li>
+            </ul>
+
           </div>
         </div>
       </div>
@@ -73,33 +75,11 @@
       <h3>Create book</h3>
       <div class="containerInputsLogin">
         <form @submit.prevent="createBook">
-          <input
-            v-model="title"
-            class="inputLogin"
-            id="title"
-            placeholder="Title"
-          />
-          <input
-            type="text"
-            class="inputLogin"
-            id="author"
-            v-model="author"
-            placeholder="Author"
-          />
-          <input
-            type="text"
-            class="inputLogin"
-            id="year"
-            v-model="year"
-            placeholder="Year"
-          />
-          <input
-            type="file"
-            class="inputLogin"
-            @change="handleFileUpload"
-            id="fileInput"
-            placeholder="Profile Photo"
-          />
+          <input v-model="title" class="inputLogin" id="title" placeholder="Title" />
+          <input type="text" class="inputLogin" id="author" v-model="author" placeholder="Author" />
+          <input type="text" class="inputLogin" id="year" v-model="year" placeholder="Year" />
+          <input type="text" class="inputLogin" id="about" v-model="about" placeholder="About" />
+          <input type="file" class="inputLogin" @change="handleFileUpload" id="fileInput" placeholder="Profile Photo" />
 
           <div class="containerButtonLogin">
             <h3 class="forgotPass">Forgot passowrd</h3>
@@ -113,97 +93,46 @@
     <div class="containerFooterUp">
       <div class="containerTitle">
         <h1 class="textTitlePage">BOOKS</h1>
-        <img
-          src="../../images/hand-drawn-bookstore-logo-template 1.svg"
-          alt=""
-        />
+        <img src="../../images/hand-drawn-bookstore-logo-template 1.svg" alt="" />
       </div>
       <p>
         Developed with
         <span class="iconHeart">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            class="iconHeart"
-          >
-            <path
-              fill="#eea016"
-              d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="iconHeart">
+            <path fill="#eea016"
+              d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
           </svg>
         </span>
         by
-        <span class="nameAuthor"
-          ><a target="_blank" href="https://thiagoalvesportfolio.vercel.app/"
-            >Thiago Alves</a
-          ></span
-        >
+        <span class="nameAuthor"><a target="_blank" href="https://thiagoalvesportfolio.vercel.app/">Thiago
+            Alves</a></span>
       </p>
     </div>
     <div class="containerFooterDown">
       <h3>@ Thiago Alves 2024</h3>
       <div class="containerIconsFooter">
-        <a
-          href="https://www.linkedin.com/in/thiago-alves17/"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-            class="iconFooter"
-          >
-            <path
-              fill="#ffffff"
-              d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"
-            />
+        <a href="https://www.linkedin.com/in/thiago-alves17/" target="_blank" rel="noopener noreferrer"><svg
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="iconFooter">
+            <path fill="#ffffff"
+              d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
           </svg>
         </a>
-        <a
-          href="https://github.com/thiagoHenrique847"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 496 512"
-            class="iconFooter"
-          >
-            <path
-              fill="#ffffff"
-              d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
-            />
+        <a href="https://github.com/thiagoHenrique847" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="iconFooter">
+            <path fill="#ffffff"
+              d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
           </svg>
         </a>
-        <a
-          href="https://thiagoalvesportfolio.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-            class="iconFooter"
-          >
-            <path
-              fill="#ffffff"
-              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"
-            />
+        <a href="https://thiagoalvesportfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="iconFooter">
+            <path fill="#ffffff"
+              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
           </svg>
         </a>
-        <a
-          href="https://www.instagram.com/thiago.freelas/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-            class="iconFooter"
-          >
-            <path
-              fill="#ffffff"
-              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
-            />
+        <a href="https://www.instagram.com/thiago.freelas/" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="iconFooter">
+            <path fill="#ffffff"
+              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
           </svg>
         </a>
       </div>
@@ -221,8 +150,11 @@ export default {
       title: "",
       author: "",
       year: "",
+      about: "",
       image: null,
       books: [],
+      textSearch: "",
+      filteredBooks: []
     };
   },
   mounted() {
@@ -234,7 +166,6 @@ export default {
         await axios.get("http://localhost:5000/api/books").then((respo) => {
           const data = respo.data;
           this.books = data;
-          console.log(data);
         });
       } catch (error) {
         console.error(error);
@@ -245,7 +176,7 @@ export default {
       this.image = event.target.files[0];
     },
     async createBook() {
-      if (!this.title || !this.author || !this.year || !this.image) {
+      if (!this.title || !this.author || !this.about || !this.year || !this.image) {
         alert("Por favor, preencha todos os campos.");
         return;
       }
@@ -253,19 +184,47 @@ export default {
       formData.append("title", this.title);
       formData.append("author", this.author);
       formData.append("year", this.year);
+      formData.append("about", this.about);
       formData.append("image", this.image);
       console.log(formData);
 
       try {
         await axios
           .post("http://localhost:5000/api/books", formData)
-          .then((respo) => {
-            console.log(respo);
+          .then(() => {
+            alert("Livro cadastrado com sucesso!!")
           });
       } catch (error) {
         console.log(error);
       }
     },
+    handleNavigation(toDestination, object) {
+      if (toDestination !== this.$route.path) {
+        // Avoid navigating to the same path repeatedly
+        if (!object) {
+          this.$router.push({ path: toDestination });
+        } else {
+          // If object exists, pass it via params (if your route supports it)
+          localStorage.setItem("bookData", JSON.stringify(object))
+          this.$router.push(toDestination);
+        }
+      }
+    },
+    async searchBook() {
+      const formData = new FormData();
+      formData.append("title", this.textSearch);
+
+      try {
+        await axios
+          .post("http://localhost:5000/api/books/search", formData)
+          .then((respo) => {
+            // this.filteredBooks = respo
+            console.log(respo);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>
@@ -297,11 +256,20 @@ body {
   background-color: var(--color-white);
   margin-left: 0pc;
   margin-right: 0pc
-  /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
+    /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
 }
-.subContainerWeb{
-  /* margin-left: 8pc */
+
+.containerMainInput {
+  display: flex;
+  align-items: flex-end;
 }
+
+.btnSearch {
+  width: 120px;
+  height: 40px;
+  margin-left: 10px;
+}
+
 .containerNavBar {
   padding: 10px;
   display: flex;
@@ -328,7 +296,7 @@ body {
 }
 
 .textTitlePage,
-.containerTitleButton > h3 {
+.containerTitleButton>h3 {
   font-weight: 600;
   font-family: Arial, Helvetica, sans-serif;
   color: var(--color-yellow);
@@ -341,7 +309,7 @@ body {
   align-items: center;
 }
 
-.containerOptionsUser > .iconUser {
+.containerOptionsUser>.iconUser {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -375,7 +343,7 @@ body {
   justify-content: space-around;
 }
 
-.containerTitleButton > button {
+.containerTitleButton>button {
   width: 190px;
   height: 50px;
   border: none;
@@ -401,18 +369,18 @@ body {
   border: 1px solid black;
 }
 
-.subContainerInput > input {
+.subContainerInput>input {
   width: 290px;
   border: none;
   background-color: transparent;
 }
 
-.subContainerInput > input::placeholder {
+.subContainerInput>input::placeholder {
   color: black;
   font-weight: 600;
 }
 
-.subContainerInput > input:focus {
+.subContainerInput>input:focus {
   outline: none;
 }
 
@@ -477,10 +445,12 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 .containerBookMain,
 img {
   width: 130px;
 }
+
 .containerBookMain:hover {
   cursor: pointer;
 }
@@ -494,7 +464,7 @@ img {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.subContainerBookData > h5 {
+.subContainerBookData>h5 {
   font-size: 17px;
   color: var(--color-green);
 }
@@ -503,11 +473,9 @@ img {
   height: 231px;
   margin-top: 4pc;
   background: rgb(90, 178, 166);
-  background: linear-gradient(
-    180deg,
-    rgba(90, 178, 166, 1) 35%,
-    rgba(38, 76, 71, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(90, 178, 166, 1) 35%,
+      rgba(38, 76, 71, 1) 100%);
 }
 
 .containerFooterUp {
@@ -517,7 +485,7 @@ img {
   flex-direction: column;
 }
 
-.containerFooterUp > p {
+.containerFooterUp>p {
   display: flex;
   align-items: center;
   margin-left: 5px;
@@ -529,7 +497,7 @@ img {
   margin-right: 12px;
 }
 
-.containerFooterUp > p > span {
+.containerFooterUp>p>span {
   text-decoration: underline;
 }
 
@@ -542,7 +510,7 @@ img {
   justify-content: space-between;
 }
 
-.containerFooterDown > h3 {
+.containerFooterDown>h3 {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--color-white_second);
 }
@@ -556,7 +524,7 @@ img {
   cursor: pointer;
 }
 
-.nameAuthor > a {
+.nameAuthor>a {
   margin-left: 12px;
   color: var(--color-yellow);
 }
@@ -576,6 +544,7 @@ p {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--color-white_second);
 }
+
 .bookList {
   display: flex;
   flex-wrap: wrap;
@@ -586,7 +555,8 @@ p {
 }
 
 .containerBookMain {
-  flex: 1 1 calc(20% - 16px); /* 20% width (5 items per row) minus gap */
+  flex: 1 1 calc(20% - 16px);
+  /* 20% width (5 items per row) minus gap */
   box-sizing: border-box;
   text-align: center;
 }

@@ -20,11 +20,11 @@
   <div class="containerBookWidth">
     <div class="containerMainBook">
       <div class="containerDataBook">
-        <div v-for="book in bookData" v-bind:key="book._id">
-          <img :src="'http://localhost:5000/' + book.image" alt="" />
-        </div>
+      
+          <img :src="'http://localhost:5000/' + bookData.image" alt="" />
+
         <div class="containerDataBookText">
-          <h2 class="titleDataBook">Shadow of Infinity</h2>
+          <h2 class="titleDataBook">{{ bookData.title}}</h2>
           <span class="aboutBookText">
             In the year 2157, humanity reached the pinnacle of space
             exploration, but the discovery of a mysterious artifact on a
@@ -39,7 +39,7 @@
               <ul id="firstUpContainerCharacBook" class="containerCharacBook">
                 <li class="containerSection">
                   <h4 class="sectionTitle">PUBLISHER:</h4>
-                  <h4 class="sectionAbout">Thiago Alves</h4>
+                  <h4 class="sectionAbout">{{ bookData.author }}</h4>
                 </li>
                 <li class="containerSection">
                   <h4 class="sectionTitle">
@@ -114,6 +114,7 @@
           <div class="containerBottons">
             <button class="borrowButton" id="borrowButton">Borrow</button>
             <button class="refundButton" id="refundButton">Refund</button>
+            <button class="refundButton" @click="deleteBook(bookData._id)" id="refundButton">Delete</button>
           </div>
         </div>
       </div>
@@ -395,7 +396,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 
 export default {
@@ -408,14 +409,26 @@ export default {
   mounted() {
     const bookData = this.getDataBook()
     this.bookData = bookData
+    console.log(this.bookData);
+    
   },
-
   methods: {
     handleNavigation(toDestination) {
       this.$router.push(toDestination)
     },
     getDataBook() {
       return JSON.parse(localStorage.getItem("bookData"))
+    },
+    async deleteBook(idDelete){
+      try {
+        await axios.delete(`http://localhost:5000/api/books/${idDelete}`).then(() =>{
+          alert("Livro deletado com sucesso!")
+          this.$router.push("/HomePage")
+        })
+      } catch (error) {
+        console.log(error);
+        
+      }
     }
   },
   props: {
