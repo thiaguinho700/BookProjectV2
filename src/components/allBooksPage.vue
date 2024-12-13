@@ -50,7 +50,7 @@
                 <div class="subContainerBookData">
                   <h3>{{ book.title }}</h3>
                   <h4>{{ book.author }}</h4>
-                  <h5>Available</h5>
+                  <h4>{{ book.borrow }}</h4>
                 </div>
               </li>
             </ul>
@@ -62,7 +62,8 @@
                 <div class="subContainerBookData">
                   <h3>{{ book.title }}</h3>
                   <h4>{{ book.author }}</h4>
-                  <h5>Available</h5>
+                  <h4>{{ book.borrow }}</h4>
+
                 </div>
               </li>
             </ul>
@@ -211,12 +212,16 @@ export default {
       }
     },
     async searchBook() {
+      console.log(this.textSearch);
+      
       const formData = new FormData();
       formData.append("title", this.textSearch);
 
       try {
         await axios
-          .post("http://localhost:5000/api/books/search", formData)
+          .post("http://localhost:5000/api/books/search", {
+            title:this.textSearch
+          })
           .then((respo) => {
             // this.filteredBooks = respo
             console.log(respo);
@@ -253,7 +258,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white);
+  background-color: var(--bg-main_color);
   margin-left: 0pc;
   margin-right: 0pc
     /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */

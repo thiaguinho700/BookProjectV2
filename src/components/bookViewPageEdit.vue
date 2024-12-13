@@ -24,10 +24,10 @@
         <img :src="'http://localhost:5000/' + bookData.image" alt="" />
 
         <div class="containerDataBookText">
-          <input type="text" placeholder="Nome of the book" class="inputName" v-model="bookDataAbout.title">
+          <input type="text" placeholder="Nome of the book" class="inputName" v-model="bookData.title">
           <h2 class="titleDataBook"></h2>
           <span class="aboutBookText">
-           <textarea name="" id="" v-model="bookDataAbout.about"></textarea>
+            <textarea name="" id="" v-model="bookData.about"></textarea>
           </span>
 
           <div class="containerDataBookSub">
@@ -109,7 +109,7 @@
             </div>
           </div>
           <div class="containerBottons">
-            <button class="borrowButton" id="borrowButton">Save changes</button>
+            <button class="borrowButton" id="borrowButton" @click="saveEditBook(bookData._id)">Save changes</button>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@ export default {
   data() {
     return {
       bookData: [],
-      idBookApi :'',
+      idBookApi: '',
       bookDataAbout: {
         title: '',
         author: '',
@@ -190,14 +190,8 @@ export default {
     }
   },
   mounted() {
-    const bookData = this.getDataBook()
-    this.bookData = bookData
-    this.idBookApi = bookData._id
-    this.bookDataAbout.title = bookData.title
-    this.bookDataAbout.author = bookData.author
-    this.bookDataAbout.year = bookData.year
-    this.bookDataAbout.about = bookData.about
-    this.bookDataAbout.image = bookData.image
+    this.bookData = this.getDataBook()
+
   },
   methods: {
     handleNavigation(toDestination) {
@@ -206,20 +200,21 @@ export default {
     getDataBook() {
       return JSON.parse(localStorage.getItem("bookData"))
     },
-    async saveEditBook() {
+    async saveEditBook(idBook) {
 
-      const formData = new FormData()
-      formData.append("title", this.bookDataAbout.title)
-      formData.append("author", this.bookDataAbout.author)
-      formData.append("year", this.bookDataAbout.year)
-      formData.append("about", this.bookDataAbout.about)
-      formData.append("image", this.bookDataAbout.image)
+      const data = {
+        title: this.bookData.title,
+        author: this.bookData.author,
+        year: this.bookData.year,
+        about: this.bookData.about,
+        image: this.bookData.image
+      };
 
+      await axios.patch(`http://localhost:5000/api/books/${idBook}`, data).then((respo) => {
+        console.log(respo);
 
-
-      await axios.patch(`http://localhost:5000/api/books/${this.idBookApi}`, formData).then(() =>{
         alert("Dados atualizados com sucesso!")
-        this.$router.push("HomePage")
+        this.$router.push("/HomePage")
       })
     }
   },
@@ -253,7 +248,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white);
+  background-color: var(--bg-main_color);
   /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
 }
 

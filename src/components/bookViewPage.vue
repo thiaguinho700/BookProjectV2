@@ -20,18 +20,13 @@
   <div class="containerBookWidth">
     <div class="containerMainBook">
       <div class="containerDataBook">
-      
-          <img :src="'http://localhost:5000/' + bookData.image" alt="" />
+
+        <img :src="'http://localhost:5000/' + bookData.image" alt="" />
 
         <div class="containerDataBookText">
-          <h2 class="titleDataBook">{{ bookData.title}}</h2>
+          <h2 class="titleDataBook">{{ bookData.title }}</h2>
           <span class="aboutBookText">
-            In the year 2157, humanity reached the pinnacle of space
-            exploration, but the discovery of a mysterious artifact on a
-            distant moon shook the foundations of science. The artifact, named
-            the "Eye of Infinity," is a glowing sphere capable of distorting
-            time and space, causing those who touch it to experience visions
-            of possible futures and forgotten pasts.
+            {{ bookData.about }}
           </span>
 
           <div class="containerDataBookSub">
@@ -112,8 +107,8 @@
             </div>
           </div>
           <div class="containerBottons">
-            <button class="borrowButton" id="borrowButton">Borrow</button>
-            <button class="refundButton" id="refundButton">Refund</button>
+            <button class="borrowButton" id="borrowButton" @click="getBook(bookData._id)">Borrow</button>
+            <button class="refundButton" id="refundButton" @click="devolverBook(bookData._id)">Refund</button>
             <button class="refundButton" @click="deleteBook(bookData._id)" id="refundButton">Delete</button>
             <button class="refundButton" @click="editBook(bookData._id)" id="refundButton">Edit</button>
           </div>
@@ -348,7 +343,7 @@
     <div class="containerFooterUp">
       <div class="containerTitle">
         <h1 class="textTitlePage">BOOKS</h1>
-        
+
       </div>
       <p>
         Developed with
@@ -397,6 +392,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'bookViewPage',
@@ -409,7 +405,7 @@ export default {
     const bookData = this.getDataBook()
     this.bookData = bookData
     console.log(this.bookData);
-    
+
   },
   methods: {
     handleNavigation(toDestination) {
@@ -418,9 +414,38 @@ export default {
     getDataBook() {
       return JSON.parse(localStorage.getItem("bookData"))
     },
-    async editBook(idEdit){
+    async editBook(idEdit) {
       localStorage.setItem("idEditBook", idEdit)
       this.$router.push("/editBook")
+    },
+    async getBook(idBook) {
+      await axios.patch(`http://localhost:5000/api/books/${idBook}`,
+      {  borrow : "Livro Pego"}
+      ).then(() => {
+        alert("Livro pego com sucesso")
+      }).catch((erro) =>{
+        console.log(erro);
+        
+      })
+    },
+    async devolverBook(idBook) {
+      await axios.patch(`http://localhost:5000/api/books/${idBook}`,{
+        borrow : "Livro Devolvido"
+      }).then(() => {
+        alert("Livro devolvido sucesso")
+      }).catch((erro) =>{
+        console.log(erro);
+        
+      })
+    },
+    async deleteBook(idBook){
+      await axios.delete(`http://localhost:5000/api/books/${idBook}`).then(() => {
+        alert("Livro deletado sucesso")
+        this.$router.push("/HomePage")
+      }).catch((erro) =>{
+        console.log(erro);
+        
+      })
     }
   },
   props: {
@@ -453,7 +478,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white);
+  background-color: var(--bg-main_color);
   /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
 }
 

@@ -373,6 +373,7 @@ export default {
       formData.append('idEmployee', this.idEmployee);
       formData.append('email', this.email);
       formData.append('image', this.image); // Adiciona o arquivo de imagem
+      formData.append('isOn', true); // Adiciona o arquivo de imagem
 
       try {
         // Faz a requisição POST com o FormData
@@ -388,7 +389,7 @@ export default {
 
         if (response.status >= 200 || response.status <= 299) {
           alert('Registro realizado com sucesso!');
-          localStorage.setItem('dataUser', response.data);
+          localStorage.setItem('dataUser', JSON.stringify(response.data));
           this.$router.push('/HomePage');
         }
       } catch (error) {
@@ -409,13 +410,13 @@ export default {
           if (response.status >= 200 || response.status <= 299) {
             alert('Usuário logado com sucesso!');
             // Aqui você pode redirecionar para a página de login ou outro lugar
-            localStorage.setItem("userData", JSON.stringify(username))          
+            localStorage.setItem("dataUser", JSON.stringify(username))
             this.$router.push('/HomePage');
-        }
+          }
 
         } catch (error) {
           console.error(error);
-          alert('Erro ao registrar usuário');
+          alert('Erro fazer login');
         }
       } else {
         alert("Por favor, preencha todos os campos.")

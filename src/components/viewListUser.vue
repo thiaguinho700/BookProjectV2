@@ -19,6 +19,28 @@
 
   <div class="containerBookWidth">
 
+    <div class="containerDataUser">
+      <img :src="'http://localhost:5000/' + dataUser.image" alt="">
+      <h3>Nome: {{ this.dataUser.username }}</h3>
+      <h3>ID User: {{ this.dataUser.idEmployee }}</h3>
+      <h3>Email: {{ this.dataUser.email }}</h3>
+    </div>
+
+
+  </div>
+  <div class="containerDataUserList">
+    <div class="containerUser" v-for="user in dataListUser" v-bind:key="user._id">
+      <h3>{{ user.username }}</h3>
+      <div v-if="user.isOn">
+        <h3>Ativado</h3>
+      </div>
+      <div v-else>
+        <h3>Desativo</h3>
+      </div>
+      <button @click="desativarBook(user._id)">Desativar</button>
+      <button @click="ativarBook(user._id)">Ativar</button>
+
+    </div>
   </div>
   <footer class="containerFooter">
     <div class="containerFooterUp">
@@ -80,10 +102,14 @@ export default {
   name: 'viewListUser',
   data() {
     return {
-      bookData: []
+      bookData: [],
+      dataUser: "",
+      dataListUser: []
     }
   },
   mounted() {
+    this.dataUser = JSON.parse(localStorage.getItem("dataUser"))
+    this.getDataUserList()
 
   },
   methods: {
@@ -95,7 +121,29 @@ export default {
       } catch (error) {
         console.error("Error fetching books:", error); // Debug error
       }
-    }
+    },
+    async getDataUserList() {
+      try {
+        const respo = await axios.get("http://localhost:5000/api/auth");
+        this.dataListUser = respo.data.map((item) => item);
+      } catch (error) {
+        console.error("Error fetching books:", error); // Debug error
+      }
+    },
+    async desativarBook(idUser){
+      await axios.patch(`http://localhost:5000/api/auth/${idUser}`, {
+        isOn:false
+      }).then(() =>{
+        alert("Desativado com sucesso!")
+      })
+    },
+    async ativarBook(idUser){
+      await axios.patch(`http://localhost:5000/api/auth/${idUser}`, {
+        isOn:true
+      }).then(() =>{
+        alert("Desativado com sucesso!")
+      })
+    },
   },
   props: {
     book: {
@@ -127,7 +175,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white);
+  background-color: var(--bg-main_color);
   /* background-image: url(../../images/bgImage/Desktop\ -\ 11.png); */
 }
 
@@ -143,6 +191,29 @@ body {
   padding-left: 2pc;
   padding-right: 2pc;
   background-color: var(--bg-main_color);
+}
+
+.containerBookWidth {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerUser {
+  margin: 1pc
+}
+
+.containerDataUser {
+  width: 500px;
+  height: 700px;
+  background-color: white;
+}
+
+.containerDataUserList {
+  width: 500px;
+  height: 70pc;
+  background-color: white;
 }
 
 .imageLogoSite {

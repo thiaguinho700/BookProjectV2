@@ -5,12 +5,12 @@
       <img src="../../images/hand-drawn-bookstore-logo-template 1.svg" alt="" />
     </div>
     <div class="containerOptionsUser">
-      <div class="iconUser" @click="handleNavigation('/listUser')" ></div>
+      <div class="iconUser" @click="handleNavigation('/listUser', userData)" ></div>
     </div>
   </nav>
   <div class="containerWelcome">
     <div class="containerWelcomeText">
-      <h3 class="welcomeText" id="welcomeText">Welcome, {{ userData }}</h3>
+      <h3 class="welcomeText" id="welcomeText">Welcome, {{ userData.username }}</h3>
       <h5>What are we gonna read today?</h5>
     </div>
 
@@ -501,13 +501,13 @@
         </div>
         <div class="containerDownChart">
           <canvas id="myChart4"></canvas>
-          <canvas id="myChart5"></canvas>
-          <canvas id="myChart6"></canvas>
+
 
         </div>
 
       
       </div>
+      <button @click="exportChartToPDF()">Exportar PDF</button>
       <!-- <div class="subContainerChart">
         <div id="chart-containerV4"></div>
         <div id="chart-containerV5"></div>
@@ -531,7 +531,8 @@
             <h2>{{ book.title }}</h2>
             <h3>Author: {{ book.author }}</h3>
             <h3>Ano: {{ book.year }}</h3>
-            <span>Available</span>
+            <h3>{{ book.borrow }}</h3>
+            
           </div>
         </li>
       </ul>
@@ -542,7 +543,8 @@
             <h2>{{ book.title }}</h2>
             <h3>Author: {{ book.author }}</h3>
             <h3>Ano: {{ book.year }}</h3>
-            <span>Available</span>
+            <h3>{{ book.borrow }}</h3>
+            
           </div>
         </li>
       </ul>
@@ -553,7 +555,8 @@
             <h2>{{ book.title }}</h2>
             <h3>Author: {{ book.author }}</h3>
             <h3>Ano: {{ book.year }}</h3>
-            <span>Available</span>
+            <h3>{{ book.borrow }}</h3>
+            
           </div>
         </li>
       </ul>
@@ -615,6 +618,7 @@
 // import BarChart from "@/graphics/BarChart.vue";
 import axios from "axios";
 import Chart from 'chart.js/auto';
+import { jsPDF } from "jspdf";
 
 
 export default {
@@ -626,8 +630,7 @@ export default {
     const ctx2 = document.getElementById('myChart2');
     const ctx3 = document.getElementById('myChart3');
     const ctx4 = document.getElementById('myChart4');
-    const ctx5 = document.getElementById('myChart5');
-    const ctx6 = document.getElementById('myChart6');
+ 
     this.userData = localStorage.getItem("userData")
     this.getBooks()
 
@@ -688,68 +691,33 @@ export default {
       }
     });
     myChart3
-    const myChart4 = new Chart(ctx4, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+      const myChart4 = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
-    myChart4
-    const myChart5 = new Chart(ctx5, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-    myChart5
-    const myChart6 = new Chart(ctx6, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-    myChart6
+      });
+      this.myChart4 = myChart4
+    
+
   },
   props: ['book'],
   data() {
     return {
       books: [],
+      myChart4:'',
       userData :''
     };
   },
@@ -757,6 +725,29 @@ export default {
   //   BarChart
   // },
   methods: {
+    exportChartToPDF() {
+      if (!this.myChart4) {
+        alert("O gráfico ainda não foi carregado!");
+        return;
+      }
+
+      // Capturar o gráfico como imagem
+      const chartImage = this.myChart4.toBase64Image();
+
+      // Criar o PDF
+      const pdf = new jsPDF();
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      // Adicionar a imagem ao PDF
+      pdf.addImage(chartImage, "PNG", 10, 10, pageWidth - 20, pageHeight - 20);
+
+      // Baixar o PDF
+      pdf.save("chart.pdf");
+    },
+
+// Exemplo: Adicione um botão para exportar
+
     async getBooks() {
       try {
         const respo = await axios.get("http://localhost:5000/api/books");
@@ -804,7 +795,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white);
+  background-color: var(--bg-main_color);
 }
 
 .containerTemplate {
